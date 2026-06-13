@@ -20,12 +20,12 @@ import {
   FieldGroup,
   FieldLabel
 } from '@/components/ui/field';
-import { PasswordInput } from '@/components/ui/password-input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { resetPassword } from '@/server/user';
 import { Spinner } from '@/components/ui/spinner';
+import { PasswordInput } from '@/components/custom/password-input';
+import { resetPassword } from '@/server/users';
 
 const formSchema = z
   .object({

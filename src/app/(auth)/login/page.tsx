@@ -1,6 +1,11 @@
-import { isAuthenticated } from '@/server/user';
+import { isAuthenticated } from '@/server/users';
 import { LoginForm } from './login-form';
 import { redirect } from 'next/navigation';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login'
+};
 
 export default async function LoginPage() {
   const session = await isAuthenticated();
@@ -10,8 +15,8 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className='bg-background relative flex min-h-screen w-full flex-col overflow-x-hidden'>
-      <div className='flex h-full grow flex-col items-center justify-center p-4'>
+    <div className='flex min-h-svh w-full items-center justify-center p-6 md:p-10'>
+      <div className='w-full max-w-sm'>
         <LoginForm />
       </div>
     </div>

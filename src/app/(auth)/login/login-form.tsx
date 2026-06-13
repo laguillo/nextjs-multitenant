@@ -7,7 +7,6 @@ import * as z from 'zod';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PasswordInput } from '@/components/ui/password-input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -19,10 +18,10 @@ import {
   FieldGroup,
   FieldLabel
 } from '@/components/ui/field';
-import Image from 'next/image';
 import { Checkbox } from '@/components/ui/checkbox';
 import { AlertTriangleIcon } from 'lucide-react';
 import { Alert } from '@/components/ui/alert';
+import { PasswordInput } from '@/components/custom/password-input';
 
 const signInSchema = z.object({
   email: z
@@ -113,16 +112,6 @@ export function LoginForm({
     >
       {/* Header */}
       <div className='flex flex-col items-center gap-2 text-center'>
-        <div className='bg-primary/10 text-primary mb-2 flex h-12 w-12 items-center justify-center rounded-xl'>
-          <Image
-            src='/nextjs.svg'
-            alt='Logo'
-            width={50}
-            height={50}
-            className='size-12'
-            priority
-          />
-        </div>
         <h1 className='text-2xl font-semibold tracking-tight'>Welcome back</h1>
         <p className='text-muted-foreground text-sm'>
           Enter your email below to login to your account
@@ -182,6 +171,7 @@ export function LoginForm({
                   <PasswordInput
                     {...field}
                     id='password'
+                    className='rounded-l-lg'
                     placeholder='••••••••'
                     autoComplete='current-password'
                     aria-invalid={fieldState.invalid}

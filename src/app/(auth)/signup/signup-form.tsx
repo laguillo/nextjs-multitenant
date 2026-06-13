@@ -12,7 +12,6 @@ import {
   FieldLabel
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { PasswordInput } from '@/components/ui/password-input';
 import { useState } from 'react';
 import { authClient } from '@/lib/auth-client';
 import { toast } from 'sonner';
@@ -22,6 +21,7 @@ import { Spinner } from '@/components/ui/spinner';
 import Image from 'next/image';
 import { Alert } from '@/components/ui/alert';
 import { AlertTriangleIcon } from 'lucide-react';
+import { PasswordInput } from '@/components/custom/password-input';
 
 const signUpSchema = z.object({
   name: z

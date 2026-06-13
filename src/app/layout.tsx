@@ -6,7 +6,10 @@ import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 export const metadata: Metadata = {
-  title: 'SaaS Multi-Tenant Starter Template',
+  title: {
+    default: 'Next.js Multi-Tenant SaaS Starter',
+    template: '%s | Next.js Multi-Tenant SaaS Starter'
+  },
   description:
     'A starter template for building a multi-tenant SaaS application with Next.js, TypeScript, and Tailwind CSS.'
 };

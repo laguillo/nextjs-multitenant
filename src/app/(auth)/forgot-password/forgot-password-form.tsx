@@ -16,9 +16,9 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { forgotPassword } from '@/server/user';
 import { Spinner } from '@/components/ui/spinner';
 import Image from 'next/image';
+import { forgotPassword } from '@/server/users';
 
 const formSchema = z.object({
   email: z

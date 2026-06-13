@@ -2,8 +2,8 @@ import { ForgotPasswordForm } from './forgot-password-form';
 
 export default async function ForgotPasswordRoute() {
   return (
-    <div className='bg-background relative flex min-h-screen w-full flex-col overflow-x-hidden'>
-      <div className='flex h-full grow flex-col items-center justify-center p-4'>
+    <div className='flex min-h-svh w-full items-center justify-center p-6 md:p-10'>
+      <div className='w-full max-w-sm'>
         <ForgotPasswordForm />
       </div>
     </div>
