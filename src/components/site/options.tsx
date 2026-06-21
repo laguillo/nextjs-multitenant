@@ -1,4 +1,4 @@
-import { isAuthenticated } from '@/server/user';
+import { isAuthenticated } from '@/server/users';
 import Link from 'next/link';
 
 export default async function OptionsButton() {
