@@ -18,29 +18,37 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Spinner } from '@/components/ui/spinner';
-import Image from 'next/image';
 import { Alert } from '@/components/ui/alert';
 import { AlertTriangleIcon } from 'lucide-react';
 import { PasswordInput } from '@/components/custom/password-input';
 
-const signUpSchema = z.object({
-  name: z
-    .string()
-    .min(2, 'Name is required.')
-    .max(50, 'Name must be at most 50 characters.'),
-  lastName: z
-    .string()
-    .min(2, 'Last name is required.')
-    .max(50, 'Last name must be at most 50 characters.'),
-  email: z
-    .email('Please enter a valid email address.')
-    .min(5, 'Email is too short.')
-    .max(50, 'Email must be at most 50 characters.'),
-  password: z
-    .string()
-    .min(8, 'Password is too short.')
-    .max(100, 'Password must be at most 100 characters.')
-});
+const signUpSchema = z
+  .object({
+    name: z
+      .string()
+      .min(2, 'Name is required.')
+      .max(50, 'Name must be at most 50 characters.'),
+    lastName: z
+      .string()
+      .min(2, 'Last name is required.')
+      .max(50, 'Last name must be at most 50 characters.'),
+    email: z
+      .email('Please enter a valid email address.')
+      .min(5, 'Email is too short.')
+      .max(50, 'Email must be at most 50 characters.'),
+    password: z
+      .string()
+      .min(8, 'Password is too short.')
+      .max(100, 'Password must be at most 100 characters.'),
+    repeatPassword: z
+      .string()
+      .min(8, 'Please repeat your password.')
+      .max(100, 'Password must be at most 100 characters.')
+  })
+  .refine((data) => data.password === data.repeatPassword, {
+    message: 'Passwords do not match.',
+    path: ['repeatPassword']
+  });
 
 export function SignupForm({
   className,
@@ -58,7 +66,8 @@ export function SignupForm({
       name: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      repeatPassword: ''
     }
   });
 
@@ -99,16 +108,6 @@ export function SignupForm({
     >
       {/* Header */}
       <div className='flex flex-col items-center gap-2 text-center'>
-        <div className='bg-primary/10 text-primary mb-2 flex h-12 w-12 items-center justify-center rounded-xl'>
-          <Image
-            src='/nextjs.svg'
-            alt='Logo'
-            width={50}
-            height={50}
-            className='size-12'
-            priority
-          />
-        </div>
         <h1 className='text-2xl font-semibold tracking-tight'>
           Create your account
         </h1>
@@ -205,6 +204,30 @@ export function SignupForm({
                   <PasswordInput
                     {...field}
                     id='password'
+                    placeholder='••••••••'
+                    autoComplete='new-password'
+                    aria-invalid={fieldState.invalid}
+                    className='rounded-l-lg'
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+
+            {/* Repeat Password Field */}
+            <Controller
+              name='repeatPassword'
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor='repeatPassword'>
+                    Repeat Password
+                  </FieldLabel>
+                  <PasswordInput
+                    {...field}
+                    id='repeatPassword'
                     placeholder='••••••••'
                     autoComplete='new-password'
                     aria-invalid={fieldState.invalid}
