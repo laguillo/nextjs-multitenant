@@ -35,14 +35,12 @@ type Values = z.infer<typeof schema>;
 export interface LoginFormProps {
   orgName?: string;
   tenantSlug?: string;
-  electionTypeLabel?: string | null;
   recoveryUrl?: string;
 }
 
 export default function TenantLoginForm({
   orgName,
   tenantSlug,
-  electionTypeLabel,
   recoveryUrl
 }: LoginFormProps) {
   const [loading, setLoading] = useState(false);
@@ -106,11 +104,6 @@ export default function TenantLoginForm({
             <h1 className='text-xl leading-tight font-bold'>
               {orgName ?? 'Ingreso al equipo'}
             </h1>
-            {electionTypeLabel && (
-              <p className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>
-                Campaña · {electionTypeLabel}
-              </p>
-            )}
           </div>
           <p className='text-muted-foreground text-xs text-balance'>
             Introduce tu correo y contraseña para acceder a las herramientas de
