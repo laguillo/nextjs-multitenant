@@ -4,31 +4,45 @@ import { useState } from 'react';
 
 const ITEMS = [
   {
-    q: 'Is the template free to use?',
-    a: "Yes. It's open source under the MIT license — clone it, deploy it, and use it for personal or commercial projects with no strings attached."
-  },
-  {
-    q: 'Do I need a Railway account?',
-    a: 'To use the one-click deploy, yes. Railway offers a free tier to get started and provisions your PostgreSQL database automatically. You can also self-host anywhere that runs Node.'
-  },
-  {
-    q: 'Which authentication methods are supported?',
-    a: 'Better Auth ships with email & password, social OAuth providers (GitHub, Google, and more), and email magic links. Everything is pre-configured — just add your provider keys.'
-  },
-  {
-    q: 'Can I swap PostgreSQL for another database?',
+    q: 'How does multi-tenancy work?',
     a: (
       <>
-        Absolutely. Prisma supports MySQL, SQLite, MongoDB and more — change the
-        provider in{' '}
-        <code className='font-mono text-[0.85em]'>schema.prisma</code>, update
-        your connection string, and run a migration.
+        Each organization gets its own scoped route at{' '}
+        <code className='font-mono text-[0.85em]'>/tenant/[slug]</code>. When a
+        user is authenticated and belongs to an organization, they access its
+        data in isolation from all other tenants. Membership is validated in the
+        layout — not just middleware — so there&apos;s no way for a tenant to
+        access another tenant&apos;s data even with a valid session.
       </>
     )
   },
   {
-    q: 'Is it production-ready?',
-    a: "It's built on stable, battle-tested libraries with sensible defaults for security and performance. Add your environment variables and business logic, and you're ready to launch."
+    q: 'How do member invitations work?',
+    a: "An organization owner sends an invitation via Better Auth's organization plugin. The invited user receives an email with a link that, once clicked, accepts the invitation and adds them as a member with the specified role. The entire invite flow — token generation, email delivery, and membership creation — is pre-configured."
+  },
+  {
+    q: 'Which authentication methods are supported?',
+    a: 'Better Auth ships with email & password (with email verification), Google OAuth, and more. Everything is pre-configured — just add your provider keys to the environment variables.'
+  },
+  {
+    q: 'Can I customize roles per tenant?',
+    a: (
+      <>
+        Yes. The starter ships with{' '}
+        <code className='font-mono text-[0.85em]'>owner</code> and{' '}
+        <code className='font-mono text-[0.85em]'>member</code> roles built on
+        Better Auth&apos;s access control layer. You can add custom roles and
+        permissions in{' '}
+        <code className='font-mono text-[0.85em]'>
+          src/lib/auth-permissions.ts
+        </code>{' '}
+        without changing the database schema.
+      </>
+    )
+  },
+  {
+    q: 'Is the template free to use?',
+    a: "Yes. It's open source under the MIT license — clone it, deploy it, and use it for personal or commercial projects with no strings attached."
   }
 ];
 

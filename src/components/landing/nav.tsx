@@ -45,7 +45,7 @@ export function LandingNav() {
             <span className='bg-primary text-primary-foreground grid size-7.5 place-items-center rounded-xl'>
               <Terminal className='size-4.25' />
             </span>
-            Next.js Starter
+            Multitenant Starter
           </Link>
 
           {/* Desktop nav links */}

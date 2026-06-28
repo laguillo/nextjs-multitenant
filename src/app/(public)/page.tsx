@@ -3,7 +3,7 @@ import { LandingNav } from '@/components/landing/nav';
 import { CopyCommand } from '@/components/landing/copy-command';
 import { LandingFAQ } from '@/components/landing/faq';
 
-/* ─── Icons (Lucide-style inline SVGs for server component) ─── */
+/* ─── Icons ─── */
 
 function CheckIcon({ className = 'size-[13px]' }) {
   return (
@@ -108,7 +108,7 @@ function AppMock() {
               <rect x='3' y='11' width='18' height='11' rx='2' />
               <path d='M7 11V7a5 5 0 0 1 10 0v4' />
             </svg>
-            app.yoursaas.com/dashboard
+            tenant/acme/dashboard
           </div>
         </div>
         {/* app grid */}
@@ -117,9 +117,20 @@ function AppMock() {
           <aside className='border-border bg-muted/25 hidden border-r p-[14px] sm:flex sm:flex-col sm:gap-1'>
             <div className='mb-2 flex items-center gap-[0.55rem] px-2 py-[0.45rem]'>
               <span className='bg-primary text-primary-foreground grid size-[26px] place-items-center rounded-[7px] text-[0.7rem] font-semibold'>
-                N
+                A
               </span>
-              <b className='text-[0.82rem] font-[550]'>Acme Inc.</b>
+              <b className='text-[0.82rem] font-[550]'>Acme Corp.</b>
+              <svg
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='text-muted-foreground ml-auto size-[13px]'
+              >
+                <path d='m6 9 6 6 6-6' />
+              </svg>
             </div>
             {[
               {
@@ -158,25 +169,6 @@ function AppMock() {
                     <path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2' />
                     <circle cx='9' cy='7' r='4' />
                     <path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' />
-                  </svg>
-                )
-              },
-              {
-                label: 'Database',
-                active: false,
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-[15px]'
-                  >
-                    <ellipse cx='12' cy='5' rx='9' ry='3' />
-                    <path d='M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5' />
-                    <path d='M3 12c0 1.66 4 3 9 3s9-1.34 9-3' />
                   </svg>
                 )
               },
@@ -224,18 +216,18 @@ function AppMock() {
           <main className='p-5'>
             <div className='mb-4 flex items-center justify-between'>
               <h3 className='text-[1.05rem] font-semibold tracking-[-0.02em]'>
-                Dashboard
+                Members
               </h3>
               <span className='border-border text-muted-foreground inline-flex h-8 cursor-default items-center rounded-[calc(var(--radius)-2px)] border px-3 text-[0.78rem]'>
-                + Invite
+                + Invite member
               </span>
             </div>
             {/* stat row */}
             <div className='mb-4 grid grid-cols-3 gap-3 max-sm:grid-cols-2'>
               {[
-                { label: 'Users', value: '2,847', delta: '+12%' },
-                { label: 'MRR', value: '$8.2k', delta: '+4%' },
-                { label: 'Sessions', value: '19.4k', delta: null }
+                { label: 'Members', value: '12', delta: '+2' },
+                { label: 'Pending', value: '3', delta: null },
+                { label: 'Tenants', value: '47', delta: '+5' }
               ].map((s) => (
                 <div
                   key={s.label}
@@ -255,17 +247,22 @@ function AppMock() {
                 </div>
               ))}
             </div>
-            {/* user table */}
+            {/* member table */}
             <div className='border-border bg-background overflow-hidden rounded-[10px] border'>
               <div className='text-muted-foreground border-border bg-muted/40 grid grid-cols-[1fr_90px_70px] items-center border-b px-[14px] py-[10px] text-[0.68rem] tracking-[0.04em] uppercase'>
-                <span>User</span>
+                <span>Member</span>
                 <span>Role</span>
                 <span>Status</span>
               </div>
               {[
                 { initials: 'AC', name: 'Alex Chen', role: 'Owner' },
-                { initials: 'SJ', name: 'Sarah Jenkins', role: 'Admin' },
-                { initials: 'MR', name: 'Marco Rossi', role: 'Member' }
+                { initials: 'SJ', name: 'Sarah Jenkins', role: 'Member' },
+                {
+                  initials: 'MR',
+                  name: 'Marco Rossi',
+                  role: 'Member',
+                  pending: true
+                }
               ].map((u) => (
                 <div
                   key={u.name}
@@ -278,10 +275,17 @@ function AppMock() {
                     <span className='font-[450]'>{u.name}</span>
                   </span>
                   <span className='text-muted-foreground'>{u.role}</span>
-                  <span className='border-border inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[0.66rem] font-medium text-green-700 dark:text-green-400'>
-                    <i className='inline-block size-[5px] rounded-full bg-green-500' />
-                    Active
-                  </span>
+                  {'pending' in u && u.pending ? (
+                    <span className='border-border inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[0.66rem] font-medium text-yellow-700 dark:text-yellow-400'>
+                      <i className='inline-block size-[5px] rounded-full bg-yellow-500' />
+                      Invited
+                    </span>
+                  ) : (
+                    <span className='border-border inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[0.66rem] font-medium text-green-700 dark:text-green-400'>
+                      <i className='inline-block size-[5px] rounded-full bg-green-500' />
+                      Active
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
@@ -317,7 +321,7 @@ function CodeWindow() {
               type: 'folder'
             },
             { indent: true, label: '(auth)', icon: null, type: 'text' },
-            { indent: true, label: 'dashboard', icon: null, type: 'text' },
+            { indent: true, label: 'tenant/[slug]', icon: null, type: 'text' },
             {
               indent: false,
               label: 'lib',
@@ -379,17 +383,17 @@ function CodeWindow() {
               <span key='k' className='text-[#c026d3] dark:text-[#e879f9]'>
                 import
               </span>,
-              ' { prisma } ',
+              ' { organization } ',
               <span key='k2' className='text-[#c026d3] dark:text-[#e879f9]'>
                 from
               </span>,
               ' ',
               <span key='s' className='text-[#16a34a] dark:text-[#4ade80]'>
-                &quot;@/lib/prisma&quot;
+                &quot;better-auth/plugins&quot;
               </span>,
               ';'
             ],
-            [' '],
+            [' '],
             [
               <span key='k' className='text-[#c026d3] dark:text-[#e879f9]'>
                 export
@@ -409,33 +413,41 @@ function CodeWindow() {
               '({'
             ],
             [
-              '  database: ',
+              '  database: ',
               <span key='fn' className='text-[#2563eb] dark:text-[#60a5fa]'>
                 prismaAdapter
               </span>,
               '(prisma),'
             ],
+            ['  plugins: ['],
             [
-              '  emailAndPassword: { enabled: ',
-              <span key='k' className='text-[#c026d3] dark:text-[#e879f9]'>
-                true
-              </span>,
-              ' },'
-            ],
-            ['  socialProviders: {'],
-            [
-              '    github: { clientId: process.env.',
+              '    ',
               <span key='fn' className='text-[#2563eb] dark:text-[#60a5fa]'>
-                GH_ID
+                organization
               </span>,
-              '! },'
+              '({'
             ],
-            ['  },'],
+            [
+              '      sendInvitationEmail: ',
+              <span key='k' className='text-[#c026d3] dark:text-[#e879f9]'>
+                async
+              </span>,
+              ' (data) => {'
+            ],
+            [
+              '        ',
+              <span key='cm' className='text-muted-foreground'>
+                // send invite email
+              </span>
+            ],
+            ['      }'],
+            ['    }),'],
+            ['  ],'],
             ['});'],
-            [' '],
+            [' '],
             [
               <span key='cm' className='text-muted-foreground'>
-                // → fully typed session, ready to use
+                // → tenant isolation, RBAC and invites ready
               </span>
             ]
           ].map((line, i) => (
@@ -469,17 +481,16 @@ export default function Home() {
           </span>
 
           <h1 className='mt-[22px] text-[clamp(2.6rem,6.4vw,4.4rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-balance'>
-            Build your Next.js SaaS
+            Multi-tenant SaaS,
             <br />
-            <span className='text-muted-foreground'>
-              in minutes, not weeks.
-            </span>
+            <span className='text-muted-foreground'>ready to ship.</span>
           </h1>
 
           <p className='text-muted-foreground mx-auto mt-[22px] max-w-[600px] text-[1.075rem] [text-wrap:pretty]'>
-            A batteries-included starter pre-configured with Prisma,
-            Better&nbsp;Auth and shadcn/ui. Clone it, push the button, and ship
-            features instead of boilerplate.
+            A Next.js starter with multi-tenancy built in. Each organization
+            gets its own isolated space, member invitations, and role-based
+            access — all wired up with Better&nbsp;Auth, Prisma, and
+            shadcn/ui.
           </p>
 
           {/* CTA row */}
@@ -665,11 +676,12 @@ export default function Home() {
               // what&apos;s inside
             </span>
             <h2 className='mt-[0.6rem] text-[clamp(1.8rem,3.6vw,2.5rem)] font-semibold tracking-[-0.035em] text-balance'>
-              Everything you need to ship.
+              Multi-tenancy done right.
             </h2>
             <p className='text-muted-foreground mt-[0.9rem] max-w-[560px] text-[1.02rem] [text-wrap:pretty]'>
-              Stop configuring ESLint, wrestling with auth flows, and debugging
-              database connections. It&apos;s already done — the right way.
+              Stop rebuilding org management from scratch. The hard parts —
+              tenant routing, invitation flows, and per-org roles — are already
+              wired up.
             </p>
           </div>
           <div className='mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>
@@ -685,13 +697,31 @@ export default function Home() {
                     strokeLinejoin='round'
                     className='size-5'
                   >
+                    <path d='M3 9h18M3 15h18M9 3v18M15 3v18' />
+                  </svg>
+                ),
+                title: 'Tenant isolation',
+                body: 'Each organization lives at its own route (/tenant/[slug]) with isolated data and auth. Membership is enforced at the layout level — not just middleware.',
+                tags: ['Org routing', 'Layout guards', 'Slug-based']
+              },
+              {
+                icon: (
+                  <svg
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='1.8'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    className='size-5'
+                  >
                     <path d='M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3Z' />
                     <path d='m9 12 2 2 4-4' />
                   </svg>
                 ),
-                title: 'Authentication ready',
-                body: 'Secure sessions out of the box with Better Auth. Social logins, email magic links, and role-based access — all pre-wired.',
-                tags: ['OAuth', 'Magic links', 'Sessions']
+                title: 'Auth & invitations',
+                body: 'Email/password, Google OAuth, email verification, and org-scoped invitations — all handled by Better Auth. No custom session logic required.',
+                tags: ['Better Auth', 'OAuth', 'Invite emails']
               },
               {
                 icon: (
@@ -704,34 +734,13 @@ export default function Home() {
                     strokeLinejoin='round'
                     className='size-5'
                   >
-                    <ellipse cx='12' cy='5' rx='9' ry='3' />
-                    <path d='M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5' />
-                    <path d='M3 12c0 1.66 4 3 9 3s9-1.34 9-3' />
+                    <path d='M2 12h20M12 2v20' />
+                    <circle cx='12' cy='12' r='9' />
                   </svg>
                 ),
-                title: 'Database optimized',
-                body: 'Prisma ORM connected to PostgreSQL with type-safe queries, migrations, and a seeded schema you can extend in minutes.',
-                tags: ['Prisma', 'PostgreSQL', 'Type-safe']
-              },
-              {
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.8'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-5'
-                  >
-                    <path d='M12 2 2 7l10 5 10-5-10-5z' />
-                    <path d='m2 17 10 5 10-5' />
-                    <path d='m2 12 10 5 10-5' />
-                  </svg>
-                ),
-                title: 'Beautiful UI library',
-                body: 'Accessible components built on shadcn/ui and Tailwind. Dark mode, theming, and a polished design system included by default.',
-                tags: ['shadcn/ui', 'Tailwind', 'Dark mode']
+                title: 'Role-based access',
+                body: 'Owner and member roles per organization, enforced server-side. Extend the access control layer to add custom permissions for your domain.',
+                tags: ['RBAC', 'Per-org roles', 'Custom perms']
               }
             ].map((card) => (
               <div
@@ -787,17 +796,17 @@ export default function Home() {
               {
                 n: '1',
                 title: 'Click deploy',
-                body: 'Hit the Railway button and pick your GitHub repo. The template ships with a ready-to-go config.'
+                body: 'Hit the Railway button and pick your GitHub repo. The template ships with a ready-to-go config — database and all.'
               },
               {
                 n: '2',
-                title: 'Provision & connect',
-                body: "Railway spins up PostgreSQL and wires the DATABASE_URL for you. Add your auth secret and you're set."
+                title: 'Add your secrets',
+                body: 'Railway provisions PostgreSQL and injects DATABASE_URL automatically. Add your auth secret, Resend key, and OAuth credentials.'
               },
               {
                 n: '3',
                 title: 'Ship it',
-                body: 'Your SaaS is live on a public URL with HTTPS. Push to main and Railway redeploys automatically.'
+                body: 'Your multi-tenant SaaS is live with HTTPS. Create your first organization, invite members, and start building.'
               }
             ].map((step, i, arr) => (
               <div key={step.n} className='relative'>
@@ -847,22 +856,23 @@ export default function Home() {
               Sensible structure, zero surprises.
             </h2>
             <p className='text-muted-foreground mt-[0.9rem] max-w-[560px] text-[1.02rem] [text-wrap:pretty]'>
-              A clean App Router layout with conventions you already know. Open
-              the repo and everything is exactly where you&apos;d expect it.
+              A clean App Router layout with conventions you already know. The
+              organization plugin is pre-configured — extend it with your own
+              roles, hooks, and business logic.
             </p>
             <div className='mt-7 flex flex-col gap-3.5'>
               {[
                 {
+                  title: 'Tenant isolation guaranteed',
+                  body: 'Org membership is validated in layouts, not just middleware. No tenant data ever leaks across organizations.'
+                },
+                {
+                  title: 'Email flows included',
+                  body: 'Invitation emails, email verification, and password reset — all built with React Email and Resend.'
+                },
+                {
                   title: 'Typed end-to-end',
-                  body: 'TypeScript + Prisma client give you autocomplete from the database to the UI.'
-                },
-                {
-                  title: 'Auth helpers included',
-                  body: 'Drop-in isAuthenticated() and protected route patterns ready to copy.'
-                },
-                {
-                  title: 'Lint & format preset',
-                  body: 'ESLint, Prettier and a tuned tsconfig so commits stay clean.'
+                  body: 'TypeScript + Prisma client give you autocomplete from the database schema to the UI components.'
                 }
               ].map((item) => (
                 <div key={item.title} className='flex items-start gap-3'>
@@ -899,14 +909,14 @@ export default function Home() {
               {
                 initials: 'AC',
                 name: 'Alex Chen',
-                role: 'Senior Frontend Dev',
-                body: '"This template saved me at least 40 hours of setup. I had my MVP deployed within an hour of cloning the repo — the code quality is genuinely top notch."'
+                role: 'Senior Full-stack Dev',
+                body: '"Setting up multi-tenancy from scratch is always a week of pain. This template had org routing, invitations, and RBAC working in an afternoon. The code quality is genuinely top notch."'
               },
               {
                 initials: 'SJ',
                 name: 'Sarah Jenkins',
                 role: 'Indie Hacker',
-                body: '"The Prisma and Better Auth integration is seamless. I didn\'t have to think about session management or database types — it just works."'
+                body: '"The Better Auth organization plugin integration is seamless. I didn\'t have to think about session scoping or tenant isolation — it just works out of the box."'
               }
             ].map((q) => (
               <div
@@ -967,7 +977,7 @@ export default function Home() {
               }}
             />
             <h2 className='relative text-[clamp(1.9rem,3.6vw,2.6rem)] font-semibold tracking-[-0.035em] text-balance'>
-              Your SaaS is one click away.
+              Your multi-tenant SaaS is one click away.
             </h2>
             <p className='text-muted-foreground relative mx-auto mt-3.5 max-w-[480px]'>
               Skip the boilerplate. Deploy the starter to Railway and start
@@ -1020,11 +1030,11 @@ export default function Home() {
                     <path d='M12 19h8' />
                   </svg>
                 </span>
-                Next.js Starter
+                Multitenant Starter
               </Link>
               <p className='text-muted-foreground mt-3.5 max-w-[260px] text-[0.88rem] [text-wrap:pretty]'>
-                The fastest way to build modern SaaS applications. Open source
-                and free to use.
+                The fastest way to build multi-tenant SaaS applications. Open
+                source and free to use.
               </p>
               <div className='mt-4.5 flex gap-2'>
                 <a
@@ -1118,7 +1128,7 @@ export default function Home() {
           </div>
           <div className='border-border mt-12 flex flex-wrap items-center justify-between gap-3 border-t pt-6'>
             <p className='text-muted-foreground text-[0.82rem]'>
-              © 2026 Next.js Starter Template. MIT Licensed.
+              © 2026 Multitenant Starter. MIT Licensed.
             </p>
             <p className='text-muted-foreground font-mono text-[0.78rem]'>
               Built with Next.js · Prisma · Better Auth
