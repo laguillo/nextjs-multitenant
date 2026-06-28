@@ -50,7 +50,7 @@ export const auth = betterAuth({
       await resend.emails.send({
         from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
         to: user.email,
-        subject: 'Verifica tu correo electrónico',
+        subject: 'Verify your email address',
         react: VerifyEmail({ username: user.name, verifyUrl })
       });
     },
@@ -65,7 +65,7 @@ export const auth = betterAuth({
       await resend.emails.send({
         from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
         to: user.email,
-        subject: 'Restablece tu contraseña',
+        subject: 'Restore your password',
         react: ForgotPasswordEmail({
           username: user.name,
           resetUrl: url,
@@ -88,7 +88,7 @@ export const auth = betterAuth({
         const { error } = passwordSchema.safeParse(password);
         if (error) {
           throw new APIError('BAD_REQUEST', {
-            message: 'La contraseña no es lo suficientemente segura'
+            message: 'Password does not meet the required criteria.'
           });
         }
       }
