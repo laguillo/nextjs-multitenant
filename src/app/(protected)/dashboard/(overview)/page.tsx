@@ -1,4 +1,4 @@
-import { isAuthenticated } from '@/server/user';
+import { isAuthenticated } from '@/server/users';
 import { redirect } from 'next/navigation';
 
 export default async function DashboardPage() {
