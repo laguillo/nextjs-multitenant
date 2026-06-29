@@ -23,7 +23,6 @@ import {
   Meh,
   Settings
 } from 'lucide-react';
-import Image from 'next/image';
 
 const data = {
   navMain: [
@@ -81,14 +80,6 @@ export function AppSidebar({
               className='data-[slot=sidebar-menu-button]:p-1.5!'
             >
               <Link href='/'>
-                <Image
-                  src='/nextjs.svg'
-                  alt='Logo'
-                  width={32}
-                  height={32}
-                  className='size-8'
-                  priority
-                />
                 <span className='text-base font-semibold'>Dashboard</span>
               </Link>
             </SidebarMenuButton>
