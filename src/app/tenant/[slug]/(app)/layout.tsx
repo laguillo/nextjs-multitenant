@@ -2,18 +2,18 @@ import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import prisma from '@/lib/prisma';
-import { AppSidebar } from '@/components/dashboard/layout/app-sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/tenant/layout/app-sidebar';
+import { userType } from '@/types/user';
+import { isAuthenticated } from '@/server/users';
 
-// Next.js 16: LayoutProps es un helper global (no requiere import)
 export default async function TenantLayout({
   children,
   params
 }: LayoutProps<'/tenant/[slug]'>) {
   const { slug: tenantSlug } = await params;
 
-  // Verificar que la organización existe en la base de datos.
-  // Si no existe → 404 (el proxy no valida slugs contra la DB).
+  // Verify that the tenant exists in the database. If it doesn't exist, return a 404 error.
   const slug = await prisma.organization.findUnique({
     where: { slug: tenantSlug },
     select: { id: true, name: true, slug: true }
@@ -21,28 +21,28 @@ export default async function TenantLayout({
 
   if (!slug) notFound();
 
-  // Validar sesión real con Better Auth
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await isAuthenticated();
 
   if (!session) {
-    // Redirigir al login del tenant (el proxy lo reescribe; en acceso directo
-    // usa la ruta interna /tenant/[slug]/ingreso como fallback explícito).
-    redirect(`/tenant/${tenantSlug}/ingreso`);
+    // Not authenticated, redirect to the login page with the tenant slug as a query parameter
+    redirect(`/tenant/${tenantSlug}/login?error=not-authenticated`);
   }
 
-  // Verificar que el usuario es miembro de esta organización
+  // Verify that the user is a member of this organization
   const member = await prisma.member.findFirst({
     where: { organizationId: slug.id, userId: session.user.id }
   });
 
   if (!member) {
-    // Autenticado en la plataforma pero no pertenece a esta organización
-    redirect(`/tenant/${tenantSlug}/ingreso?error=no-member`);
+    // User is not a member of this organization, redirect to the login page with an error message
+    redirect(`/tenant/${tenantSlug}/login?error=no-member`);
   }
+
+  const user = session.user;
 
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar variant='inset' user={user as userType} />
       <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );

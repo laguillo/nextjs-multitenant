@@ -19,14 +19,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { PasswordInput } from '@/components/custom/password-input';
-import { AppLogo } from '@/components/site/app-logo';
 import { authClient } from '@/lib/auth-client';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
 const schema = z.object({
-  email: z.email({ message: 'Por favor, introduce un correo válido' }),
-  password: z.string().min(1, { message: 'La contraseña es obligatoria' }),
+  email: z.email('Please enter a valid email address.'),
+  password: z.string().min(1, 'Password is required.'),
   rememberMe: z.boolean().optional()
 });
 
@@ -51,7 +50,7 @@ export default function TenantLoginForm({
   const contextError = searchParams.get('error');
   const contextErrorMsg =
     contextError === 'no-member'
-      ? 'Tu cuenta no tiene acceso a esta campaña. Contacta al administrador.'
+      ? 'Your account does not have access to this tenant. Please contact the administrator.'
       : null;
 
   const form = useForm<Values>({
@@ -71,21 +70,18 @@ export default function TenantLoginForm({
       });
 
       if (!data) {
-        setError(error?.message || 'Credenciales inválidas');
+        setError(error?.message || 'Invalid credentials');
         setLoading(false);
         return;
       }
 
       form.reset();
-      toast.success('¡Bienvenid@!');
+      toast.success('Welcome!');
 
-      // En el subdominio del tenant "/" es reescrito por el proxy a la raíz de
-      // la campaña. No usar "/tenant/${slug}" porque el proxy lo volvería a
-      // prefijar y causaría doble nesting (tenant/slug/tenant/slug).
       const from = searchParams.get('from') ?? '/';
       router.push(from);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Algo salió mal');
+      setError(err instanceof Error ? err.message : 'Something went wrong');
     } finally {
       setLoading(false);
     }
@@ -99,15 +95,11 @@ export default function TenantLoginForm({
       <FieldGroup>
         {/* Branding */}
         <div className='flex flex-col items-center gap-3 text-center'>
-          <AppLogo size={40} />
           <div className='flex flex-col gap-0.5'>
-            <h1 className='text-xl leading-tight font-bold'>
-              {orgName ?? 'Ingreso al equipo'}
-            </h1>
+            <h1 className='text-xl leading-tight font-bold'>{orgName ?? ''}</h1>
           </div>
           <p className='text-muted-foreground text-xs text-balance'>
-            Introduce tu correo y contraseña para acceder a las herramientas de
-            campaña
+            Enter your email and password to access the tenant tools
           </p>
 
           {(error || contextErrorMsg) && (
@@ -124,12 +116,12 @@ export default function TenantLoginForm({
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>Correo electrónico</FieldLabel>
+              <FieldLabel htmlFor={field.name}>Email</FieldLabel>
               <Input
                 {...field}
                 id={field.name}
                 type='email'
-                placeholder='correo@ejemplo.com'
+                placeholder='email@example.com'
                 autoComplete='email'
                 aria-invalid={fieldState.invalid}
               />
@@ -145,13 +137,13 @@ export default function TenantLoginForm({
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <div className='flex items-center'>
-                <FieldLabel htmlFor={field.name}>Contraseña</FieldLabel>
+                <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                 {recoveryUrl && (
                   <Link
                     href={recoveryUrl}
                     className='text-muted-foreground ml-auto text-xs underline-offset-4 hover:underline'
                   >
-                    ¿Olvidaste tu contraseña?
+                    Forgot your password?
                   </Link>
                 )}
               </div>
@@ -179,19 +171,19 @@ export default function TenantLoginForm({
                 checked={field.value ?? false}
                 onCheckedChange={field.onChange}
               />
-              <FieldLabel htmlFor='rememberMe'>Recordarme</FieldLabel>
+              <FieldLabel htmlFor='rememberMe'>Remember me</FieldLabel>
             </Field>
           )}
         />
 
         <Field>
           <Button type='submit' disabled={loading} size='lg' className='w-full'>
-            {loading ? <Spinner /> : 'Ingresar'}
+            {loading ? <Spinner /> : 'Sign In'}
           </Button>
         </Field>
 
         <FieldDescription className='text-center'>
-          ¿Necesitas acceso? Contacta al administrador de la campaña.
+          Need access? Contact the campaign administrator.
         </FieldDescription>
       </FieldGroup>
     </form>
