@@ -38,12 +38,12 @@ const signUpSchema = z
       .max(50, 'Email must be at most 50 characters.'),
     password: z
       .string()
-      .min(8, 'Password is too short.')
-      .max(100, 'Password must be at most 100 characters.'),
+      .min(8, 'Password must be at least 8 characters.')
+      .max(100, 'Password must be at most 100 characters.')
+      .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character.'),
     repeatPassword: z
       .string()
-      .min(8, 'Please repeat your password.')
-      .max(100, 'Password must be at most 100 characters.')
+      .min(1, 'Please repeat your password.')
   })
   .refine((data) => data.password === data.repeatPassword, {
     message: 'Passwords do not match.',

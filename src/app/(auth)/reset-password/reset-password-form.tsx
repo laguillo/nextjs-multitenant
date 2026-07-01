@@ -32,11 +32,13 @@ const formSchema = z
     password: z
       .string()
       .min(8, 'Password must be at least 8 characters.')
-      .max(50, 'Password must be at most 50 characters.'),
+      .max(50, 'Password must be at most 50 characters.')
+      .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character.'),
     confirmPassword: z.string()
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match.'
+    message: 'Passwords do not match.',
+    path: ['confirmPassword']
   });
 
 export function ResetPasswordForm({
@@ -127,13 +129,11 @@ export function ResetPasswordForm({
                 )}
               />
               <Field>
-                <Button type='submit' disabled={isSubmitting}>
+                <Button type='submit' disabled={isSubmitting} className='w-full'>
                   {isSubmitting ? <Spinner /> : 'Reset Password'}
                 </Button>
                 <FieldDescription className='text-center'>
-                  Don&apos;t have an account?{' '}
-                  <Link href='/signup'>Sign up</Link>
-                  <br /> I have an account? <Link href='/login'>Log in</Link>
+                  <Link href='/login'>Back to sign in</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

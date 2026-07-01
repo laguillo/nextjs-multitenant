@@ -4,13 +4,7 @@ import { headers } from 'next/headers';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-export type OrgRole =
-  | 'owner'
-  | 'analyst'
-  | 'lawyer'
-  | 'witness'
-  | 'promoter'
-  | 'candidate';
+export type OrgRole = 'owner' | 'member';
 
 /**
  * Agrega un miembro a una organización usando la API de Better Auth.

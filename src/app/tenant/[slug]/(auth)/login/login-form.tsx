@@ -183,7 +183,7 @@ export default function TenantLoginForm({
         </Field>
 
         <FieldDescription className='text-center'>
-          Need access? Contact the campaign administrator.
+          Need access? Contact your organization administrator.
         </FieldDescription>
       </FieldGroup>
     </form>
