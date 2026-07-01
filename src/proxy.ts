@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { headers } from 'next/headers';
+import { auth } from '@/lib/auth';
 
 const ROOT_DOMAIN = process.env.NEXT_PUBLIC_ROOT_DOMAIN ?? 'domain.com';
 
@@ -38,7 +40,7 @@ function isTenantPublicPath(pathname: string): boolean {
   );
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
   if (
@@ -52,6 +54,18 @@ export function proxy(request: NextRequest) {
   const subdomain = extractSubdomain(request);
 
   if (!subdomain) {
+    const isProtected =
+      pathname.startsWith('/dashboard') || pathname.startsWith('/admin');
+
+    if (isProtected) {
+      const session = await auth.api.getSession({ headers: await headers() });
+      if (!session) {
+        return NextResponse.redirect(
+          new URL(`/login?from=${encodeURIComponent(pathname)}`, request.url)
+        );
+      }
+    }
+
     return NextResponse.next();
   }
 
