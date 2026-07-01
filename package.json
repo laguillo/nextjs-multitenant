@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "bunx --bun prisma generate && bun --bun next build",
     "start": "bun --bunnext start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "tsx prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
