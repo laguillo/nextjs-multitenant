@@ -1,4 +1,5 @@
 import { notFound, redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 import prisma from '@/lib/prisma';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/tenant/layout/app-sidebar';
@@ -19,10 +20,22 @@ export default async function TenantLayout({
 
   if (!org) notFound();
 
+  // El proxy establece x-tenant en requests de subdominio (slug.domain.com).
+  // En acceso directo por path (/tenant/[slug]) este header no existe.
+  const requestHeaders = await headers();
+  const isSubdomainAccess = requestHeaders.get('x-tenant') !== null;
+
+  // En modo subdominio, el proxy maneja el routing: redirigir a /login es
+  // suficiente porque el proxy lo reescribe a /tenant/[slug]/login.
+  // En modo path directo, redirigimos a la ruta absoluta del tenant.
+  const loginPath = isSubdomainAccess
+    ? '/login'
+    : `/tenant/${tenantSlug}/login`;
+
   const session = await isAuthenticated();
 
   if (!session) {
-    redirect(`/tenant/${tenantSlug}/login?error=not-authenticated`);
+    redirect(`${loginPath}?error=not-authenticated`);
   }
 
   const member = await prisma.member.findFirst({
@@ -30,7 +43,7 @@ export default async function TenantLayout({
   });
 
   if (!member) {
-    redirect(`/tenant/${tenantSlug}/login?error=no-member`);
+    redirect(`${loginPath}?error=no-member`);
   }
 
   return (
