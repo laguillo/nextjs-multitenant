@@ -15,54 +15,25 @@ import {
 import Link from 'next/link';
 import { userType } from '@/types/user';
 import {
+  Building2,
   CreditCard,
-  LayoutDashboard,
   FolderOpen,
   HelpCircle,
-  Lock,
-  Meh,
-  Settings
+  LayoutDashboard,
+  Settings,
+  Terminal
 } from 'lucide-react';
 
 const data = {
   navMain: [
-    {
-      title: 'Dashboard',
-      url: '/dashboard',
-      icon: LayoutDashboard
-    },
-    {
-      title: 'Projects',
-      url: '#',
-      icon: FolderOpen
-    },
-    {
-      title: 'Billing',
-      url: '#',
-      icon: CreditCard
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings
-    },
-    {
-      title: 'Get Help',
-      url: '#',
-      icon: HelpCircle
-    }
+    { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboard },
+    { title: 'Organizations', url: '#', icon: Building2 },
+    { title: 'Projects', url: '#', icon: FolderOpen },
+    { title: 'Billing', url: '#', icon: CreditCard }
   ],
   navSecondary: [
-    {
-      title: 'Unauthorized',
-      url: '/admin',
-      icon: Lock
-    },
-    {
-      title: 'Not Found',
-      url: '/non-existent-page',
-      icon: Meh
-    }
+    { title: 'Settings', url: '#', icon: Settings },
+    { title: 'Get Help', url: '#', icon: HelpCircle }
   ]
 };
 
@@ -80,7 +51,8 @@ export function AppSidebar({
               className='data-[slot=sidebar-menu-button]:p-1.5!'
             >
               <Link href='/'>
-                <span className='text-base font-semibold'>Dashboard</span>
+                <Terminal className='size-5!' />
+                <span className='text-base font-semibold'>My Workspace</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

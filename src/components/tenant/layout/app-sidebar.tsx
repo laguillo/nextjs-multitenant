@@ -14,62 +14,25 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { userType } from '@/types/user';
-import {
-  CreditCard,
-  LayoutDashboard,
-  FolderOpen,
-  HelpCircle,
-  Lock,
-  Meh,
-  Settings
-} from 'lucide-react';
+import { Building2, HelpCircle, LayoutDashboard, Settings, Users } from 'lucide-react';
 
-const data = {
-  navMain: [
-    {
-      title: 'Dashboard',
-      url: '/dashboard',
-      icon: LayoutDashboard
-    },
-    {
-      title: 'Projects',
-      url: '#',
-      icon: FolderOpen
-    },
-    {
-      title: 'Billing',
-      url: '#',
-      icon: CreditCard
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings
-    },
-    {
-      title: 'Get Help',
-      url: '#',
-      icon: HelpCircle
-    }
-  ],
-  navSecondary: [
-    {
-      title: 'Unauthorized',
-      url: '/admin',
-      icon: Lock
-    },
-    {
-      title: 'Not Found',
-      url: '/non-existent-page',
-      icon: Meh
-    }
-  ]
-};
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  user: userType;
+  slug: string;
+  orgName: string;
+}
 
-export function AppSidebar({
-  user,
-  ...props
-}: React.ComponentProps<typeof Sidebar> & { user: userType }) {
+export function AppSidebar({ user, slug, orgName, ...props }: AppSidebarProps) {
+  const navMain = [
+    { title: 'Overview', url: `/tenant/${slug}`, icon: LayoutDashboard },
+    { title: 'Members', url: `/tenant/${slug}/members`, icon: Users },
+    { title: 'Settings', url: `/tenant/${slug}/settings`, icon: Settings }
+  ];
+
+  const navSecondary = [
+    { title: 'Get Help', url: '#', icon: HelpCircle }
+  ];
+
   return (
     <Sidebar collapsible='offcanvas' {...props}>
       <SidebarHeader>
@@ -79,16 +42,17 @@ export function AppSidebar({
               asChild
               className='data-[slot=sidebar-menu-button]:p-1.5!'
             >
-              <Link href='/'>
-                <span className='text-base font-semibold'>Dashboard</span>
+              <Link href={`/tenant/${slug}`}>
+                <Building2 className='size-5!' />
+                <span className='truncate text-base font-semibold'>{orgName}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className='mt-auto' />
+        <NavMain items={navMain} />
+        <NavSecondary items={navSecondary} className='mt-auto' />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />
