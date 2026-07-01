@@ -150,7 +150,7 @@ export default function TenantLoginForm({
                 placeholder='********'
                 autoComplete='current-password'
                 aria-invalid={fieldState.invalid}
-                className='rounded-full'
+                className='rounded-l-lg'
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
