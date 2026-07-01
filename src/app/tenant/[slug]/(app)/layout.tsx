@@ -1,6 +1,4 @@
-import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/tenant/layout/app-sidebar';
