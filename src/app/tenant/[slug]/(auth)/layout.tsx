@@ -1,5 +1,4 @@
-// Override del layout padre ([tenant]/layout.tsx) para la página de login.
-// No incluye TenantNavbar — el login es una pantalla limpia sin navegación.
+// Overrides the parent layout so the login page renders without the sidebar.
 export default function LoginLayout({
   children,
 }: {

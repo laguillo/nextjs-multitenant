@@ -93,7 +93,6 @@ export default function TenantLoginForm({
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <FieldGroup>
-        {/* Branding */}
         <div className='flex flex-col items-center gap-3 text-center'>
           <div className='flex flex-col gap-0.5'>
             <h1 className='text-xl leading-tight font-bold'>{orgName ?? ''}</h1>
@@ -110,7 +109,6 @@ export default function TenantLoginForm({
           )}
         </div>
 
-        {/* Email */}
         <Controller
           name='email'
           control={form.control}
@@ -130,7 +128,6 @@ export default function TenantLoginForm({
           )}
         />
 
-        {/* Contraseña */}
         <Controller
           name='password'
           control={form.control}
@@ -160,7 +157,6 @@ export default function TenantLoginForm({
           )}
         />
 
-        {/* Recordarme */}
         <Controller
           name='rememberMe'
           control={form.control}

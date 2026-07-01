@@ -20,14 +20,13 @@ export default async function TenantLayout({
 
   if (!org) notFound();
 
-  // El proxy establece x-tenant en requests de subdominio (slug.domain.com).
-  // En acceso directo por path (/tenant/[slug]) este header no existe.
+  // The proxy sets x-tenant on subdomain requests (slug.domain.com).
+  // Direct path access (/tenant/[slug]) does not have this header.
+  // On subdomain: redirect to /login — the proxy rewrites it to /tenant/[slug]/login.
+  // On path access: redirect to the full tenant login path directly.
   const requestHeaders = await headers();
   const isSubdomainAccess = requestHeaders.get('x-tenant') !== null;
 
-  // En modo subdominio, el proxy maneja el routing: redirigir a /login es
-  // suficiente porque el proxy lo reescribe a /tenant/[slug]/login.
-  // En modo path directo, redirigimos a la ruta absoluta del tenant.
   const loginPath = isSubdomainAccess
     ? '/login'
     : `/tenant/${tenantSlug}/login`;

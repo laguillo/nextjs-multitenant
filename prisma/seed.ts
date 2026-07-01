@@ -6,10 +6,8 @@ import 'dotenv/config';
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-// Contraseña para todas las cuentas demo
 const PASSWORD = 'Demo@1234!';
 
-// Colores ANSI para la consola
 const c = {
   reset: '\x1b[0m',
   green: '\x1b[32m',
@@ -26,7 +24,6 @@ function log(icon: string, msg: string) {
 async function main() {
   console.log(`\n${c.bold}${c.blue}Seeding database...${c.reset}\n`);
 
-  // ─── Limpieza ─────────────────────────────────────────────────────────────
   console.log(`${c.gray}Clearing existing data...${c.reset}`);
   await prisma.invitation.deleteMany();
   await prisma.member.deleteMany();
@@ -36,7 +33,6 @@ async function main() {
   await prisma.verification.deleteMany();
   await prisma.user.deleteMany();
 
-  // ─── Usuarios ─────────────────────────────────────────────────────────────
   console.log(`\n${c.bold}Users${c.reset}`);
 
   const [
@@ -79,7 +75,6 @@ async function main() {
   });
   log(c.green + '✓' + c.reset, `admin@demo.com          ${c.gray}role: admin${c.reset}`);
 
-  // alice@demo.com — Owner de Acme Corp
   const alice = await prisma.user.create({
     data: {
       name: 'Alice Martínez',
@@ -100,7 +95,6 @@ async function main() {
   });
   log(c.green + '✓' + c.reset, `alice@demo.com          ${c.gray}owner of Acme Corp${c.reset}`);
 
-  // bob@demo.com — Owner de Globex
   const bob = await prisma.user.create({
     data: {
       name: 'Bob González',
@@ -121,7 +115,6 @@ async function main() {
   });
   log(c.green + '✓' + c.reset, `bob@demo.com            ${c.gray}owner of Globex${c.reset}`);
 
-  // carol@demo.com — Member de Acme Corp
   const carol = await prisma.user.create({
     data: {
       name: 'Carol López',
@@ -142,7 +135,6 @@ async function main() {
   });
   log(c.green + '✓' + c.reset, `carol@demo.com          ${c.gray}member of Acme Corp${c.reset}`);
 
-  // david@demo.com — Member de ambas orgs
   const david = await prisma.user.create({
     data: {
       name: 'David Ramírez',
@@ -163,7 +155,6 @@ async function main() {
   });
   log(c.green + '✓' + c.reset, `david@demo.com          ${c.gray}member of both orgs${c.reset}`);
 
-  // eve@demo.com — Usuario sin org ni verificación (prueba email verification)
   await prisma.user.create({
     data: {
       name: 'Eve Sánchez',
@@ -184,7 +175,6 @@ async function main() {
   });
   log(c.yellow + '~' + c.reset, `eve@demo.com            ${c.gray}unverified, no org${c.reset}`);
 
-  // ─── Organizaciones ───────────────────────────────────────────────────────
   console.log(`\n${c.bold}Organizations${c.reset}`);
 
   const acme = await prisma.organization.create({
@@ -205,16 +195,13 @@ async function main() {
   });
   log(c.green + '✓' + c.reset, `Globex Industries       ${c.gray}slug: globex${c.reset}`);
 
-  // ─── Membresías ───────────────────────────────────────────────────────────
   console.log(`\n${c.bold}Members${c.reset}`);
 
   const memberships = [
-    // Acme Corp
     { user: alice, org: acme, role: 'owner' },
     { user: carol, org: acme, role: 'member' },
     { user: david, org: acme, role: 'member' },
     { user: admin, org: acme, role: 'member' },
-    // Globex
     { user: bob, org: globex, role: 'owner' },
     { user: david, org: globex, role: 'member' }
   ];
@@ -234,7 +221,6 @@ async function main() {
     );
   }
 
-  // ─── Invitación pendiente ─────────────────────────────────────────────────
   console.log(`\n${c.bold}Invitations${c.reset}`);
 
   const expiresAt = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -256,7 +242,6 @@ async function main() {
     `frank@demo.com          ${c.gray}invited to Acme Corp (pending)${c.reset}`
   );
 
-  // ─── Resumen ──────────────────────────────────────────────────────────────
   console.log(`\n${'─'.repeat(56)}`);
   console.log(`${c.bold}${c.green}Done!${c.reset} Seed complete.\n`);
   console.log(`${c.bold}Test accounts${c.reset} (password: ${c.bold}${PASSWORD}${c.reset})\n`);

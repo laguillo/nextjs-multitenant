@@ -4,9 +4,6 @@ import { headers } from 'next/headers';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-/**
- * Devuelve todas las organizaciones a las que pertenece el usuario activo.
- */
 export async function getOrganizations() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) return [];
@@ -19,10 +16,6 @@ export async function getOrganizations() {
   return members.map((m) => m.organization);
 }
 
-/**
- * Devuelve la organización activa de un usuario dado su userId.
- * Usa el primer membership encontrado como fallback (una campaña por usuario en plan básico).
- */
 export async function getActiveOrganization(userId: string) {
   const member = await prisma.member.findFirst({
     where: { userId },
@@ -32,9 +25,6 @@ export async function getActiveOrganization(userId: string) {
   return member?.organization ?? null;
 }
 
-/**
- * Devuelve una organización por su slug, incluyendo sus miembros con datos de usuario.
- */
 export async function getOrganizationBySlug(slug: string) {
   try {
     const org = await prisma.organization.findUnique({
