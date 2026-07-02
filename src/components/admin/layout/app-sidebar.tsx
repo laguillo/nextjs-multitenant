@@ -6,9 +6,9 @@ import {
   CreditCard,
   LayoutDashboard,
   Layers,
-  Newspaper,
   Settings,
-  Users
+  Users,
+  Building2
 } from 'lucide-react';
 
 import { NavMain } from '@/components/admin/layout/nav-main';
@@ -28,38 +28,14 @@ import { userType } from '@/types/user';
 
 const data = {
   navMain: [
-    {
-      title: 'Dashboard',
-      url: '/admin',
-      icon: LayoutDashboard
-    },
-    {
-      title: 'Users',
-      url: '#',
-      icon: Users
-    },
-    {
-      title: 'Suscriptions',
-      url: '#',
-      icon: CreditCard
-    },
-    {
-      title: 'Documents',
-      url: '#',
-      icon: Newspaper
-    }
+    { title: 'Overview', url: '/admin', icon: LayoutDashboard },
+    { title: 'Users', url: '#', icon: Users },
+    { title: 'Organizations', url: '#', icon: Building2 },
+    { title: 'Subscriptions', url: '#', icon: CreditCard }
   ],
   navSecondary: [
-    {
-      title: 'Analytics',
-      url: '#',
-      icon: BarChart
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings
-    }
+    { title: 'Analytics', url: '#', icon: BarChart },
+    { title: 'Settings', url: '#', icon: Settings }
   ]
 };
 
@@ -86,7 +62,7 @@ export function AppSidebar({
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} />
+        <NavSecondary items={data.navSecondary} className='mt-auto' />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />

@@ -35,7 +35,7 @@ The app has two routing domains:
 - `/(protected)/admin` — admin-only (requires `user.role === 'admin'`)
 
 **Tenant routes** — each org gets its own space at `/tenant/[slug]`:
-- `/tenant/[slug]/(auth)/ingreso` — tenant-scoped login
+- `/tenant/[slug]/(auth)/login` — tenant-scoped login
 - `/tenant/[slug]/(app)` — authenticated tenant app
 
 ### Auth (Better Auth)

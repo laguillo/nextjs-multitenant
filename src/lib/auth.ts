@@ -21,15 +21,9 @@ export const auth = betterAuth({
     provider: 'postgresql'
   }),
 
-  // ─── Cookies cross-subdominio ─────────────────────────────────────────────
-  // Necesario para que la sesión iniciada en domain.com sea visible en
-  // organization.domain.com. Sin esto el proxy siempre ve hasSession=false en
-  // el subdominio y redirige al login aunque el usuario ya esté autenticado.
-  //
-  // En desarrollo local (ROOT_DOMAIN=localhost) NO se activa: los browsers
-  // no aceptan domain=localhost en cookies, cada subdominio maneja su propia
-  // cookie y el proxy optimista se salta el check (hasSession puede ser false
-  // sin problema porque el layout valida la sesión real de todas formas).
+  // Cross-subdomain cookies: lets a session started on domain.com be visible on
+  // org.domain.com. Disabled for localhost — browsers reject domain=localhost
+  // cookies, so each subdomain keeps its own cookie in dev.
   advanced: {
     crossSubDomainCookies: {
       enabled: process.env.NEXT_PUBLIC_ROOT_DOMAIN !== 'localhost',
@@ -39,8 +33,8 @@ export const auth = betterAuth({
 
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
-      // Redirigir al usuario a la página de verificación propia en lugar
-      // del endpoint API de Better Auth que devuelve JSON crudo.
+      // Redirect to the app's verify-email page instead of the Better Auth
+      // API endpoint, which returns raw JSON.
       const apiUrl = new URL(url);
       const token = apiUrl.searchParams.get('token') ?? '';
       const callbackURL =
@@ -96,7 +90,6 @@ export const auth = betterAuth({
   },
 
   plugins: [
-    // ─── Plugin organization (tenant) ─────────────────────────────────────────
     organization({
       sendInvitationEmail: async (data) => {
         const inviteLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/accept-invitation/${data.id}`;

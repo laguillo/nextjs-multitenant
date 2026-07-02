@@ -37,7 +37,6 @@ export function LandingNav() {
     <>
       <header className='border-border bg-background/70 sticky top-0 z-50 border-b backdrop-blur-md [backdrop-filter:saturate(180%)_blur(12px)]'>
         <div className='mx-auto flex h-15 max-w-280 items-center justify-between px-6'>
-          {/* Brand */}
           <Link
             href='/'
             className='flex items-center gap-2.5 text-[0.95rem] font-semibold tracking-[-0.02em]'
@@ -48,7 +47,6 @@ export function LandingNav() {
             Multitenant Starter
           </Link>
 
-          {/* Desktop nav links */}
           <nav className='hidden items-center gap-1 md:flex'>
             {navLinks.map((link) => (
               <Link
@@ -61,9 +59,7 @@ export function LandingNav() {
             ))}
           </nav>
 
-          {/* Actions */}
           <div className='flex items-center gap-2'>
-            {/* GitHub */}
             <a
               href='https://github.com/laguillo/nextjs-better-auth-prisma-template'
               target='_blank'
@@ -74,7 +70,6 @@ export function LandingNav() {
               <GithubIcon />
             </a>
 
-            {/* Theme toggle */}
             <button
               onClick={toggleTheme}
               className='border-border bg-background text-foreground hover:bg-muted inline-flex size-9 items-center justify-center rounded-[calc(var(--radius)-2px)] border transition-colors'
@@ -90,9 +85,6 @@ export function LandingNav() {
                 <Sun className='size-4.5' />
               )}
             </button>
-            {/* <ModeToggle /> */}
-
-            {/* Deploy CTA — hidden on mobile */}
             <Link
               href='#deploy'
               className='bg-primary text-primary-foreground hidden h-10 items-center gap-2 rounded-[calc(var(--radius)-2px)] px-4 text-sm font-medium transition-all hover:-translate-y-px hover:opacity-90 md:inline-flex'
@@ -101,7 +93,6 @@ export function LandingNav() {
               Deploy on Railway
             </Link>
 
-            {/* Mobile menu button */}
             <button
               onClick={() => setMenuOpen((v) => !v)}
               className='border-border bg-background text-foreground hover:bg-muted inline-flex size-9 items-center justify-center rounded-[calc(var(--radius)-2px)] border transition-colors md:hidden'
@@ -117,7 +108,6 @@ export function LandingNav() {
         </div>
       </header>
 
-      {/* Mobile menu */}
       {menuOpen && (
         <div className='border-border bg-background fixed inset-x-0 top-15 z-40 flex flex-col gap-1 border-t p-6 md:hidden'>
           {navLinks.map((link) => (

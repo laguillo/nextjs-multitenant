@@ -3,7 +3,7 @@ import { SiteHeader } from '@/components/admin/layout/site-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { isAuthenticated } from '@/server/users';
 import { userType } from '@/types/user';
-import { unauthorized } from 'next/navigation';
+import { redirect, unauthorized } from 'next/navigation';
 
 export default async function AdminLayout({
   children
@@ -12,7 +12,11 @@ export default async function AdminLayout({
 }) {
   const session = await isAuthenticated();
 
-  if (!session || session.user.role !== 'admin') {
+  if (!session) {
+    redirect('/login');
+  }
+
+  if (session.user.role !== 'admin') {
     unauthorized();
   }
 

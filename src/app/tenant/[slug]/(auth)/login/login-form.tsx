@@ -93,7 +93,6 @@ export default function TenantLoginForm({
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <FieldGroup>
-        {/* Branding */}
         <div className='flex flex-col items-center gap-3 text-center'>
           <div className='flex flex-col gap-0.5'>
             <h1 className='text-xl leading-tight font-bold'>{orgName ?? ''}</h1>
@@ -110,7 +109,6 @@ export default function TenantLoginForm({
           )}
         </div>
 
-        {/* Email */}
         <Controller
           name='email'
           control={form.control}
@@ -130,7 +128,6 @@ export default function TenantLoginForm({
           )}
         />
 
-        {/* Contraseña */}
         <Controller
           name='password'
           control={form.control}
@@ -153,14 +150,13 @@ export default function TenantLoginForm({
                 placeholder='********'
                 autoComplete='current-password'
                 aria-invalid={fieldState.invalid}
-                className='rounded-full'
+                className='rounded-l-lg'
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
         />
 
-        {/* Recordarme */}
         <Controller
           name='rememberMe'
           control={form.control}
@@ -183,7 +179,7 @@ export default function TenantLoginForm({
         </Field>
 
         <FieldDescription className='text-center'>
-          Need access? Contact the campaign administrator.
+          Need access? Contact your organization administrator.
         </FieldDescription>
       </FieldGroup>
     </form>

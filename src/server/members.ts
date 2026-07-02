@@ -4,18 +4,8 @@ import { headers } from 'next/headers';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-export type OrgRole =
-  | 'owner'
-  | 'analyst'
-  | 'lawyer'
-  | 'witness'
-  | 'promoter'
-  | 'candidate';
+export type OrgRole = 'owner' | 'member';
 
-/**
- * Agrega un miembro a una organización usando la API de Better Auth.
- * El rol debe ser uno de los 6 roles electorales.
- */
 export const addMember = async (
   organizationId: string,
   userId: string,
@@ -31,14 +21,10 @@ export const addMember = async (
     });
   } catch (error) {
     console.error('[addMember]', error);
-    throw new Error('No se pudo agregar el miembro.');
+    throw new Error('Failed to add member.');
   }
 };
 
-/**
- * Elimina un miembro de una organización.
- * Acepta el ID del miembro o su email.
- */
 export const removeMember = async (
   memberIdOrEmail: string,
   organizationId?: string
@@ -54,14 +40,11 @@ export const removeMember = async (
     console.error('[removeMember]', error);
     return {
       success: false,
-      error: 'No se pudo eliminar el miembro.'
+      error: 'Failed to remove member.'
     };
   }
 };
 
-/**
- * Devuelve todos los miembros de una organización con datos de usuario.
- */
 export const getMembersByOrg = async (organizationId: string) => {
   try {
     const members = await prisma.member.findMany({
@@ -75,9 +58,6 @@ export const getMembersByOrg = async (organizationId: string) => {
   }
 };
 
-/**
- * Devuelve el miembro activo de la sesión actual dentro de una organización.
- */
 export const getCurrentMember = async (organizationId: string) => {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) return null;
