@@ -52,12 +52,15 @@ Plugins in use: `organization` (tenants), `admin`, `lastLoginMethod`, `nextCooki
 
 ### Route protection
 
-`src/proxy.ts` exports a `proxy()` function and `config.matcher` for `/dashboard/:path*` and `/admin/:path*`. This is an optimistic fast-path check — it only verifies a session cookie exists.
+`src/proxy.ts` exports an async `proxy()` function matched against all routes except static assets (see `config.matcher`). It branches on subdomain:
 
-The real membership/role validation happens in the layouts:
+- **No subdomain (platform routes)**: for `/dashboard` and `/admin` it calls `auth.api.getSession()` directly and redirects to `/login` if there's no session. Other platform routes pass through untouched.
+- **Subdomain present (tenant routes)**: `/login` is rewritten to `/tenant/[slug]/login` unconditionally. Other paths get an optimistic cookie-only check (`better-auth.session_token`) before being rewritten to `/tenant/[slug]/...`; a `x-tenant` header is set on every subdomain rewrite so downstream layouts can tell subdomain access from direct `/tenant/[slug]` path access.
+
+Real membership/role validation still happens in the layouts:
 - `/(protected)/dashboard/layout.tsx` — calls `isAuthenticated()`, redirects to `/login` if none
-- `/(protected)/admin/layout.tsx` — calls `isAuthenticated()`, calls `unauthorized()` if not admin
-- `/tenant/[slug]/(app)/layout.tsx` — validates org exists in DB, then session, then checks `member` table for org membership
+- `/(protected)/admin/layout.tsx` — calls `isAuthenticated()`; redirects to `/login` if no session, calls `unauthorized()` if session exists but role isn't admin
+- `/tenant/[slug]/(app)/layout.tsx` — validates org exists in DB, then session, then checks the `member` table for org membership; reads the `x-tenant` header to pick the correct login redirect path (subdomain vs. path-based access)
 
 ### Database
 
@@ -74,7 +77,7 @@ Schema models: `User`, `Session`, `Account`, `Verification`, `Organization`, `Me
 
 ### RBAC
 
-Custom access control in `src/lib/auth-permissions.ts` using `better-auth/plugins/access`. Roles: `owner` (create/update/delete on org and projects) and `member` (create on projects). The `OrgRole` type in `src/server/members.ts` lists the domain-specific roles (`owner | analyst | lawyer | witness | promoter | candidate`).
+Custom access control in `src/lib/auth-permissions.ts` using `better-auth/plugins/access`. Roles: `owner` (create/update/delete on org and projects) and `member` (create on projects). The `OrgRole` type in `src/server/members.ts` mirrors these two roles (`'owner' | 'member'`).
 
 ### UI
 

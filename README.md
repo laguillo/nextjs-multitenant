@@ -64,7 +64,7 @@ The app has two routing domains:
 - `/admin` — admin-only (`user.role === 'admin'`)
 
 **Tenant** — each org at `/tenant/[slug]`:
-- `/tenant/[slug]/ingreso` — tenant-scoped login
+- `/tenant/[slug]/login` — tenant-scoped login
 - `/tenant/[slug]/` — authenticated tenant app
 
 ## Auth
@@ -73,7 +73,7 @@ All auth is handled by [Better Auth](https://www.better-auth.com) at `src/lib/au
 
 - **Client**: import `authClient` from `src/lib/auth-client.ts`
 - **Server**: call `isAuthenticated()` from `src/server/users.ts` in Server Components
-- **Route protection**: optimistic middleware in `src/proxy.ts` + real membership/role validation in each layout
+- **Route protection**: `src/proxy.ts` checks sessions for `/dashboard` and `/admin`, and does an optimistic cookie check for tenant subdomain routes; real membership/role validation happens in each layout
 
 ## Commands
 
