@@ -14,7 +14,13 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { userType } from '@/types/user';
-import { Building2, HelpCircle, LayoutDashboard, Settings, Users } from 'lucide-react';
+import {
+  Building2,
+  HelpCircle,
+  LayoutDashboard,
+  Settings,
+  Users
+} from 'lucide-react';
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user: userType;
@@ -29,22 +35,19 @@ export function AppSidebar({ user, slug, orgName, ...props }: AppSidebarProps) {
     { title: 'Settings', url: `/tenant/${slug}/settings`, icon: Settings }
   ];
 
-  const navSecondary = [
-    { title: 'Get Help', url: '#', icon: HelpCircle }
-  ];
+  const navSecondary = [{ title: 'Get Help', url: '#', icon: HelpCircle }];
 
   return (
     <Sidebar collapsible='offcanvas' {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className='data-[slot=sidebar-menu-button]:p-1.5!'
-            >
+            <SidebarMenuButton className='data-[slot=sidebar-menu-button]:p-1.5!'>
               <Link href={`/tenant/${slug}`}>
                 <Building2 className='size-5!' />
-                <span className='truncate text-base font-semibold'>{orgName}</span>
+                <span className='truncate text-base font-semibold'>
+                  {orgName}
+                </span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
