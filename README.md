@@ -1,6 +1,8 @@
-# Multitenant Starter
+# Multi-Tenant Starter
 
 A production-ready multi-tenant SaaS starter built with Next.js, Better Auth, Prisma, and shadcn/ui. Each organization gets its own isolated space with scoped auth, role-based access control, and transactional email flows — all pre-configured.
+
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic)
 
 ## Stack
 
@@ -36,6 +38,7 @@ EMAIL_SENDER_ADDRESS=
 ```
 
 Optional (Google OAuth):
+
 ```env
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
@@ -58,12 +61,14 @@ bun dev
 The app has two routing domains:
 
 **Platform** — used by the SaaS owner and its users:
+
 - `/` — landing page
 - `/(auth)` — sign-up, login, forgot/reset password
 - `/dashboard` — authenticated users
 - `/admin` — admin-only (`user.role === 'admin'`)
 
 **Tenant** — each org at `/tenant/[slug]`:
+
 - `/tenant/[slug]/login` — tenant-scoped login
 - `/tenant/[slug]/` — authenticated tenant app
 
