@@ -4,6 +4,7 @@ import { fontSans, fontMono } from '@/lib/fonts';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,11 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
+        className={cn(
+          fontSans.variable,
+          fontMono.variable,
+          'font-sans antialiased'
+        )}
       >
         <ThemeProvider
           attribute='class'

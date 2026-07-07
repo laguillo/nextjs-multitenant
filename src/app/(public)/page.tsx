@@ -2,98 +2,33 @@ import Link from 'next/link';
 import { LandingNav } from '@/components/landing/nav';
 import { CopyCommand } from '@/components/landing/copy-command';
 import { LandingFAQ } from '@/components/landing/faq';
-
-/* ─── Icons ─── */
-
-function CheckIcon({ className = 'size-[13px]' }) {
-  return (
-    <svg
-      fill='none'
-      stroke='currentColor'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      strokeWidth='3'
-      className={className}
-      viewBox='0 0 24 24'
-    >
-      <path d='M20 6 9 17l-5-5' />
-    </svg>
-  );
-}
-function BoltIcon({ className = 'size-4' }) {
-  return (
-    <svg
-      fill='none'
-      stroke='currentColor'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      strokeWidth='2'
-      className={className}
-      viewBox='0 0 24 24'
-    >
-      <path d='M13 2 3 14h8l-1 8 10-12h-8z' />
-    </svg>
-  );
-}
-function GithubIcon({ className = 'size-4' }) {
-  return (
-    <svg fill='currentColor' className={className} viewBox='0 0 24 24'>
-      <path d='M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.34 9.34 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2' />
-    </svg>
-  );
-}
-function StarIcon({ className = 'size-[15px]' }) {
-  return (
-    <svg fill='currentColor' className={className} viewBox='0 0 24 24'>
-      <path d='m12 2 2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17l-6 3.4 1.4-6.8L2.3 9l6.8-.7Z' />
-    </svg>
-  );
-}
-function FolderIcon({ className = 'size-[13px]' }) {
-  return (
-    <svg
-      fill='none'
-      stroke='currentColor'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      strokeWidth='2'
-      className={className}
-      viewBox='0 0 24 24'
-    >
-      <path d='M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z' />
-    </svg>
-  );
-}
-function FileIcon({ className = 'size-[13px]' }) {
-  return (
-    <svg
-      fill='none'
-      stroke='currentColor'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      strokeWidth='2'
-      className={className}
-      viewBox='0 0 24 24'
-    >
-      <path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z' />
-      <path d='M14 2v6h6' />
-    </svg>
-  );
-}
+import {
+  BoltIcon,
+  CheckIcon,
+  ChevronDown,
+  FileIcon,
+  FolderIcon,
+  LayoutDashboard,
+  SettingsIcon,
+  ShieldCheckIcon,
+  StarIcon,
+  UsersIcon
+} from 'lucide-react';
+import { GithubIcon } from '@/components/shared/icons';
 
 /* ─── App window mock (hero) ─── */
 function AppMock() {
   return (
-    <div className='relative mx-auto mt-14 max-w-[980px] px-6'>
+    <div className='relative mx-auto mt-14 max-w-5xl px-6'>
       {/* glow */}
       <div className='absolute -inset-px -z-10 rounded-2xl bg-[radial-gradient(60%_80%_at_50%_0%,hsl(var(--foreground)/0.06),transparent_70%)]' />
-      <div className='border-border bg-card overflow-hidden rounded-[14px] border shadow-xl'>
+      <div className='border-border bg-card rounded-4 overflow-hidden border shadow-xl'>
         {/* browser chrome */}
-        <div className='border-border bg-muted/40 flex h-[42px] items-center gap-2 border-b px-[14px]'>
-          <div className='flex gap-[7px]'>
-            <i className='border-border size-[11px] rounded-full border bg-transparent' />
-            <i className='border-border size-[11px] rounded-full border bg-transparent' />
-            <i className='border-border size-[11px] rounded-full border bg-transparent' />
+        <div className='border-border bg-muted/40 flex h-10 items-center gap-2 border-b px-4'>
+          <div className='flex gap-2'>
+            <i className='border-border size-3 rounded-full border bg-transparent' />
+            <i className='border-border size-3 rounded-full border bg-transparent' />
+            <i className='border-border size-3 rounded-full border bg-transparent' />
           </div>
           <div className='border-border bg-background text-muted-foreground mx-auto flex h-6 items-center gap-1.5 rounded-full border px-3 font-mono text-[0.72rem]'>
             <svg
@@ -112,90 +47,38 @@ function AppMock() {
           </div>
         </div>
         {/* app grid */}
-        <div className='grid min-h-[380px] grid-cols-[208px_1fr] max-sm:grid-cols-1'>
+        <div className='grid min-h-95 grid-cols-[208px_1fr] max-sm:grid-cols-1'>
           {/* sidebar */}
-          <aside className='border-border bg-muted/25 hidden border-r p-[14px] sm:flex sm:flex-col sm:gap-1'>
+          <aside className='border-border bg-muted/25 hidden border-r p-4 sm:flex sm:flex-col sm:gap-1'>
             <div className='mb-2 flex items-center gap-[0.55rem] px-2 py-[0.45rem]'>
-              <span className='bg-primary text-primary-foreground grid size-[26px] place-items-center rounded-[7px] text-[0.7rem] font-semibold'>
+              <span className='bg-primary text-primary-foreground grid size-6 place-items-center rounded-[7px] text-[0.7rem] font-semibold'>
                 A
               </span>
               <b className='text-[0.82rem] font-[550]'>Acme Corp.</b>
-              <svg
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='text-muted-foreground ml-auto size-[13px]'
-              >
-                <path d='m6 9 6 6 6-6' />
-              </svg>
+              <ChevronDown className='text-muted-foreground ml-auto size-3' />
             </div>
             {[
               {
                 label: 'Dashboard',
                 active: true,
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-[15px]'
-                  >
-                    <rect x='3' y='3' width='7' height='9' rx='1' />
-                    <rect x='14' y='3' width='7' height='5' rx='1' />
-                    <rect x='14' y='12' width='7' height='9' rx='1' />
-                    <rect x='3' y='16' width='7' height='5' rx='1' />
-                  </svg>
-                )
+                icon: <LayoutDashboard className='size-4' />
               },
               {
                 label: 'Members',
                 active: false,
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-[15px]'
-                  >
-                    <path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2' />
-                    <circle cx='9' cy='7' r='4' />
-                    <path d='M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' />
-                  </svg>
-                )
+                icon: <UsersIcon className='size-4' />
               },
               {
                 label: 'Settings',
                 active: false,
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-[15px]'
-                  >
-                    <path d='M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' />
-                    <path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-2.82 1.17V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15H4.5a2 2 0 0 1 0-4H4.6a1.65 1.65 0 0 0 1.51-1z' />
-                  </svg>
-                )
+                icon: <SettingsIcon className='size-4' />
               }
             ].map((item) => (
               <div
                 key={item.label}
                 className={`flex items-center gap-[0.6rem] rounded-[7px] px-[0.55rem] py-2 text-[0.8rem] font-[450] ${
                   item.active
-                    ? 'bg-background text-foreground font-[500] shadow-sm'
+                    ? 'bg-background text-foreground font-medium shadow-sm'
                     : 'text-muted-foreground'
                 }`}
               >
@@ -204,7 +87,7 @@ function AppMock() {
               </div>
             ))}
             <div className='mt-auto flex items-center gap-2 px-[0.55rem] py-2'>
-              <span className='bg-muted text-muted-foreground grid size-[22px] place-items-center rounded-full text-[0.6rem] font-semibold'>
+              <span className='bg-muted text-muted-foreground grid size-5 place-items-center rounded-full text-[0.6rem] font-semibold'>
                 JL
               </span>
               <span className='text-muted-foreground truncate text-[0.8rem]'>
@@ -231,7 +114,7 @@ function AppMock() {
               ].map((s) => (
                 <div
                   key={s.label}
-                  className='border-border bg-background rounded-[10px] border p-3'
+                  className='border-border bg-background rounded-2.5 border p-3'
                 >
                   <div className='text-muted-foreground text-[0.7rem] tracking-[0.04em] uppercase'>
                     {s.label}
@@ -248,8 +131,8 @@ function AppMock() {
               ))}
             </div>
             {/* member table */}
-            <div className='border-border bg-background overflow-hidden rounded-[10px] border'>
-              <div className='text-muted-foreground border-border bg-muted/40 grid grid-cols-[1fr_90px_70px] items-center border-b px-[14px] py-[10px] text-[0.68rem] tracking-[0.04em] uppercase'>
+            <div className='border-border bg-background rounded-2.5 overflow-hidden border'>
+              <div className='text-muted-foreground border-border bg-muted/40 grid grid-cols-[1fr_90px_70px] items-center border-b px-4 py-2.5 text-[0.68rem] tracking-[0.04em] uppercase'>
                 <span>Member</span>
                 <span>Role</span>
                 <span>Status</span>
@@ -266,10 +149,10 @@ function AppMock() {
               ].map((u) => (
                 <div
                   key={u.name}
-                  className='border-border grid grid-cols-[1fr_90px_70px] items-center border-t px-[14px] py-[10px] text-[0.78rem]'
+                  className='border-border grid grid-cols-[1fr_90px_70px] items-center border-t px-4 py-2.5 text-[0.78rem]'
                 >
                   <span className='flex items-center gap-2'>
-                    <span className='bg-muted text-muted-foreground grid size-[22px] place-items-center rounded-full text-[0.62rem] font-semibold'>
+                    <span className='bg-muted text-muted-foreground grid size-5 place-items-center rounded-full text-[0.62rem] font-semibold'>
                       {u.initials}
                     </span>
                     <span className='font-[450]'>{u.name}</span>
@@ -277,12 +160,12 @@ function AppMock() {
                   <span className='text-muted-foreground'>{u.role}</span>
                   {'pending' in u && u.pending ? (
                     <span className='border-border inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[0.66rem] font-medium text-yellow-700 dark:text-yellow-400'>
-                      <i className='inline-block size-[5px] rounded-full bg-yellow-500' />
+                      <i className='inline-block size-1.25 rounded-full bg-yellow-500' />
                       Invited
                     </span>
                   ) : (
                     <span className='border-border inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[0.66rem] font-medium text-green-700 dark:text-green-400'>
-                      <i className='inline-block size-[5px] rounded-full bg-green-500' />
+                      <i className='inline-block size-1.25 rounded-full bg-green-500' />
                       Active
                     </span>
                   )}
@@ -299,20 +182,20 @@ function AppMock() {
 /* ─── Code window (what's inside section) ─── */
 function CodeWindow() {
   return (
-    <div className='border-border bg-card overflow-hidden rounded-[14px] border shadow-lg'>
-      <div className='border-border bg-muted/40 flex h-[42px] items-center gap-2 border-b px-[14px]'>
-        <div className='flex gap-[7px]'>
-          <i className='border-border size-[11px] rounded-full border' />
-          <i className='border-border size-[11px] rounded-full border' />
-          <i className='border-border size-[11px] rounded-full border' />
+    <div className='border-border bg-card rounded-4 overflow-hidden border shadow-lg'>
+      <div className='border-border bg-muted/40 flex h-10 items-center gap-2 border-b px-4'>
+        <div className='flex gap-2'>
+          <i className='border-border size-3 rounded-full border' />
+          <i className='border-border size-3 rounded-full border' />
+          <i className='border-border size-3 rounded-full border' />
         </div>
         <span className='border-border bg-background text-muted-foreground mx-auto flex h-6 items-center rounded-full border px-3 font-mono text-[0.7rem]'>
           auth.ts
         </span>
       </div>
-      <div className='grid min-h-[340px] grid-cols-[170px_1fr] max-sm:grid-cols-1'>
+      <div className='grid min-h-85 grid-cols-[170px_1fr] max-sm:grid-cols-1'>
         {/* file tree */}
-        <div className='border-border bg-muted/25 hidden border-r p-[14px] font-mono text-[0.74rem] sm:block'>
+        <div className='border-border bg-muted/25 hidden border-r p-4 font-mono text-[0.74rem] sm:block'>
           {[
             {
               indent: false,
@@ -347,7 +230,7 @@ function CodeWindow() {
           ].map((row, i) => (
             <div
               key={i}
-              className={`flex items-center gap-[0.4rem] rounded-[5px] px-1 py-[0.2rem] whitespace-nowrap ${
+              className={`rounded-1.25 flex items-center gap-[0.4rem] px-1 py-[0.2rem] whitespace-nowrap ${
                 row.indent ? 'pl-4' : ''
               } ${
                 row.selected
@@ -471,42 +354,44 @@ export default function Home() {
       <LandingNav />
 
       {/* ── Hero ── */}
-      <section className='relative overflow-hidden pt-[88px] pb-6'>
+      <section className='relative overflow-hidden pt-22 pb-6'>
         <div className='landing-grid-bg' />
-        <div className='relative z-10 mx-auto max-w-[840px] px-6 text-center'>
+        <div className='relative z-10 mx-auto max-w-4xl px-6 text-center'>
           {/* Badge */}
           <span className='border-border bg-muted/50 text-muted-foreground inline-flex h-[1.6rem] items-center gap-[0.45rem] rounded-full border px-[0.7rem] text-[0.75rem] font-medium'>
-            <span className='size-[6px] rounded-full bg-green-500 shadow-[0_0_0_3px_#22c55e22]' />
+            <span className='size-2 rounded-full bg-green-500 shadow-[0_0_0_3px_#22c55e22]' />
             Production-ready · Open source
           </span>
 
-          <h1 className='mt-[22px] text-[clamp(2.6rem,6.4vw,4.4rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-balance'>
+          <h1 className='mt-5 text-[clamp(2.6rem,6.4vw,4.4rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-balance'>
             Multi-tenant SaaS,
             <br />
             <span className='text-muted-foreground'>ready to ship.</span>
           </h1>
 
-          <p className='text-muted-foreground mx-auto mt-[22px] max-w-[600px] text-[1.075rem] [text-wrap:pretty]'>
+          <p className='text-muted-foreground mx-auto mt-5 max-w-xl text-[1.075rem] text-pretty'>
             A Next.js starter with multi-tenancy built in. Each organization
             gets its own isolated space, member invitations, and role-based
-            access — all wired up with Better&nbsp;Auth, Prisma, and
-            shadcn/ui.
+            access — all wired up with Better&nbsp;Auth, Prisma, and shadcn/ui.
           </p>
 
           {/* CTA row */}
-          <div className='mt-[30px] flex flex-wrap justify-center gap-[0.7rem]'>
-            <Link
-              href='https://railway.com/deploy/nextjs-better-auth-prisma-template?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic'
-              className='bg-primary text-primary-foreground inline-flex h-[2.875rem] items-center gap-2 rounded-[var(--radius)] px-[1.4rem] text-[0.95rem] font-medium shadow-sm transition-all hover:-translate-y-px hover:opacity-90'
+          <div className='mt-7 flex flex-wrap justify-center gap-[0.7rem]'>
+            <a
+              href='https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic'
+              target='_blank'
+              rel='noopener noreferrer'
             >
-              <BoltIcon />
-              Deploy on Railway
-            </Link>
+              <img
+                src='https://railway.com/button.svg'
+                alt='Deploy on Railway'
+              />
+            </a>
             <a
               href='https://github.com/laguillo/nextjs-better-auth-prisma-template'
               target='_blank'
               rel='noopener noreferrer'
-              className='border-border bg-background hover:bg-muted inline-flex h-[2.875rem] items-center gap-2 rounded-[var(--radius)] border px-[1.4rem] text-[0.95rem] font-medium transition-colors'
+              className='border-border bg-background hover:bg-muted inline-flex h-11 items-center gap-2 rounded-lg border px-[1.4rem] text-[0.95rem] font-medium transition-colors'
             >
               <GithubIcon />
               Star on GitHub
@@ -521,11 +406,11 @@ export default function Home() {
 
       {/* ── Logo cloud ── */}
       <section id='stack' className='py-10'>
-        <div className='mx-auto max-w-[1120px] px-6'>
-          <p className='text-muted-foreground mb-[22px] text-center text-[0.78rem] font-[450]'>
+        <div className='mx-auto max-w-6xl px-6'>
+          <p className='text-muted-foreground mb-5 text-center text-[0.78rem] font-[450]'>
             A modern, type-safe stack — wired together and ready to extend
           </p>
-          <div className='flex flex-wrap items-center justify-center gap-x-10 gap-y-[14px]'>
+          <div className='flex flex-wrap items-center justify-center gap-x-10 gap-y-4'>
             {[
               {
                 name: 'Next.js',
@@ -656,7 +541,7 @@ export default function Home() {
                 key={tech.name}
                 className='text-muted-foreground hover:text-foreground flex items-center gap-[0.55rem] text-[0.98rem] font-[550] tracking-[-0.02em] opacity-85 transition-all hover:opacity-100'
               >
-                <span className='grid size-[22px] place-items-center'>
+                <span className='grid size-5 place-items-center'>
                   {tech.icon}
                 </span>
                 {tech.name}
@@ -666,11 +551,11 @@ export default function Home() {
         </div>
       </section>
 
-      <div className='border-border bg-border mx-auto h-px w-full max-w-[1120px]' />
+      <div className='border-border bg-border mx-auto h-px w-full max-w-6xl' />
 
       {/* ── Features ── */}
-      <section id='features' className='py-[84px]'>
-        <div className='mx-auto max-w-[1120px] px-6'>
+      <section id='features' className='py-21'>
+        <div className='mx-auto max-w-6xl px-6'>
           <div>
             <span className='text-muted-foreground font-mono text-[0.72rem] tracking-[0.12em] uppercase'>
               // what&apos;s inside
@@ -678,7 +563,7 @@ export default function Home() {
             <h2 className='mt-[0.6rem] text-[clamp(1.8rem,3.6vw,2.5rem)] font-semibold tracking-[-0.035em] text-balance'>
               Multi-tenancy done right.
             </h2>
-            <p className='text-muted-foreground mt-[0.9rem] max-w-[560px] text-[1.02rem] [text-wrap:pretty]'>
+            <p className='text-muted-foreground mt-[0.9rem] max-w-xl text-[1.02rem] text-pretty'>
               Stop rebuilding org management from scratch. The hard parts —
               tenant routing, invitation flows, and per-org roles — are already
               wired up.
@@ -689,15 +574,15 @@ export default function Home() {
               {
                 icon: (
                   <svg
-                    viewBox='0 0 24 24'
                     fill='none'
                     stroke='currentColor'
-                    strokeWidth='1.8'
                     strokeLinecap='round'
                     strokeLinejoin='round'
+                    strokeWidth='1.8'
                     className='size-5'
+                    viewBox='0 0 24 24'
                   >
-                    <path d='M3 9h18M3 15h18M9 3v18M15 3v18' />
+                    <path d='M3 9h18M3 15h18M9 3v18m6-18v18' />
                   </svg>
                 ),
                 title: 'Tenant isolation',
@@ -705,20 +590,7 @@ export default function Home() {
                 tags: ['Org routing', 'Layout guards', 'Slug-based']
               },
               {
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.8'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-5'
-                  >
-                    <path d='M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3Z' />
-                    <path d='m9 12 2 2 4-4' />
-                  </svg>
-                ),
+                icon: <ShieldCheckIcon className='size-5' />,
                 title: 'Auth & invitations',
                 body: 'Email/password, Google OAuth, email verification, and org-scoped invitations — all handled by Better Auth. No custom session logic required.',
                 tags: ['Better Auth', 'OAuth', 'Invite emails']
@@ -726,13 +598,13 @@ export default function Home() {
               {
                 icon: (
                   <svg
-                    viewBox='0 0 24 24'
                     fill='none'
                     stroke='currentColor'
-                    strokeWidth='1.8'
                     strokeLinecap='round'
                     strokeLinejoin='round'
+                    strokeWidth='1.8'
                     className='size-5'
+                    viewBox='0 0 24 24'
                   >
                     <path d='M2 12h20M12 2v20' />
                     <circle cx='12' cy='12' r='9' />
@@ -745,15 +617,15 @@ export default function Home() {
             ].map((card) => (
               <div
                 key={card.title}
-                className='border-border bg-card hover:border-ring/50 relative overflow-hidden rounded-[14px] border p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg'
+                className='border-border bg-card hover:border-ring/50 rounded-4 relative overflow-hidden border p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg'
               >
-                <div className='border-border bg-muted/50 mb-4 grid size-[42px] place-items-center rounded-[11px] border'>
+                <div className='border-border bg-muted/50 mb-4 grid size-10 place-items-center rounded-[11px] border'>
                   {card.icon}
                 </div>
                 <h3 className='text-[1.05rem] font-semibold tracking-[-0.02em]'>
                   {card.title}
                 </h3>
-                <p className='text-muted-foreground mt-2 text-[0.9rem] [text-wrap:pretty]'>
+                <p className='text-muted-foreground mt-2 text-[0.9rem] text-pretty'>
                   {card.body}
                 </p>
                 <div className='mt-3.5 flex flex-wrap gap-1.5'>
@@ -773,11 +645,8 @@ export default function Home() {
       </section>
 
       {/* ── Deploy steps ── */}
-      <section
-        id='deploy'
-        className='border-border bg-muted/35 border-y py-[84px]'
-      >
-        <div className='mx-auto max-w-[1120px] px-6'>
+      <section id='deploy' className='border-border bg-muted/35 border-y py-21'>
+        <div className='mx-auto max-w-6xl px-6'>
           <div>
             <span className='text-muted-foreground font-mono text-[0.72rem] tracking-[0.12em] uppercase'>
               // from zero to live
@@ -785,7 +654,7 @@ export default function Home() {
             <h2 className='mt-[0.6rem] text-[clamp(1.8rem,3.6vw,2.5rem)] font-semibold tracking-[-0.035em] text-balance'>
               Deploy to Railway in one click.
             </h2>
-            <p className='text-muted-foreground mt-[0.9rem] max-w-[560px] text-[1.02rem] [text-wrap:pretty]'>
+            <p className='text-muted-foreground mt-[0.9rem] max-w-xl text-[1.02rem] text-pretty'>
               No Dockerfiles, no CI pipelines to babysit. Railway provisions the
               Postgres database, injects the env vars, and builds your app
               automatically.
@@ -810,16 +679,16 @@ export default function Home() {
               }
             ].map((step, i, arr) => (
               <div key={step.n} className='relative'>
-                <div className='border-border bg-background grid size-[30px] place-items-center rounded-[8px] border font-mono text-[0.78rem] font-medium'>
+                <div className='border-border bg-background grid size-7 place-items-center rounded-[8px] border font-mono text-[0.78rem] font-medium'>
                   {step.n}
                 </div>
                 {i < arr.length - 1 && (
-                  <div className='border-border absolute top-[15px] right-[-12px] left-[42px] h-px border-t' />
+                  <div className='border-border absolute top-4 -right-3 left-10 h-px border-t' />
                 )}
                 <h3 className='mt-4 text-[1.05rem] font-semibold tracking-[-0.02em]'>
                   {step.title}
                 </h3>
-                <p className='text-muted-foreground mt-2 text-[0.9rem] [text-wrap:pretty]'>
+                <p className='text-muted-foreground mt-2 text-[0.9rem] text-pretty'>
                   {step.body}
                 </p>
               </div>
@@ -827,17 +696,18 @@ export default function Home() {
           </div>
           <div className='mt-10 flex flex-wrap items-center gap-[0.7rem]'>
             <a
-              href='https://railway.com/deploy/nextjs-better-auth-prisma-template?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic'
+              href='https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic'
               target='_blank'
               rel='noopener noreferrer'
-              className='bg-primary text-primary-foreground inline-flex h-[2.875rem] items-center gap-2 rounded-[var(--radius)] px-[1.4rem] text-[0.95rem] font-medium shadow-sm transition-all hover:-translate-y-px hover:opacity-90'
             >
-              <BoltIcon />
-              Deploy on Railway
+              <img
+                src='https://railway.com/button.svg'
+                alt='Deploy on Railway'
+              />
             </a>
             <Link
               href='#faq'
-              className='hover:bg-muted inline-flex h-[2.875rem] items-center rounded-[var(--radius)] px-[1.4rem] text-[0.95rem] font-medium transition-colors'
+              className='hover:bg-muted inline-flex h-11 items-center rounded-lg px-[1.4rem] text-[0.95rem] font-medium transition-colors'
             >
               Read the docs →
             </Link>
@@ -846,8 +716,8 @@ export default function Home() {
       </section>
 
       {/* ── What's inside ── */}
-      <section className='py-[84px]'>
-        <div className='mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1fr_1.15fr]'>
+      <section className='py-21'>
+        <div className='mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1fr_1.15fr]'>
           <div>
             <span className='text-muted-foreground font-mono text-[0.72rem] tracking-[0.12em] uppercase'>
               // developer experience
@@ -855,7 +725,7 @@ export default function Home() {
             <h2 className='mt-[0.6rem] text-[clamp(1.7rem,3.2vw,2.3rem)] font-semibold tracking-[-0.035em] text-balance'>
               Sensible structure, zero surprises.
             </h2>
-            <p className='text-muted-foreground mt-[0.9rem] max-w-[560px] text-[1.02rem] [text-wrap:pretty]'>
+            <p className='text-muted-foreground mt-[0.9rem] max-w-xl text-[1.02rem] text-pretty'>
               A clean App Router layout with conventions you already know. The
               organization plugin is pre-configured — extend it with your own
               roles, hooks, and business logic.
@@ -876,7 +746,7 @@ export default function Home() {
                 }
               ].map((item) => (
                 <div key={item.title} className='flex items-start gap-3'>
-                  <span className='bg-primary text-primary-foreground mt-[1px] grid size-[22px] flex-none place-items-center rounded-[6px]'>
+                  <span className='bg-primary text-primary-foreground mt-px grid size-5 flex-none place-items-center rounded-[6px]'>
                     <CheckIcon />
                   </span>
                   <div>
@@ -894,8 +764,8 @@ export default function Home() {
       </section>
 
       {/* ── Testimonials ── */}
-      <section className='pb-[84px]'>
-        <div className='mx-auto max-w-[1120px] px-6'>
+      <section className='pb-21'>
+        <div className='mx-auto max-w-6xl px-6'>
           <div className='text-center'>
             <span className='text-muted-foreground font-mono text-[0.72rem] tracking-[0.12em] uppercase'>
               // trusted by builders
@@ -921,18 +791,18 @@ export default function Home() {
             ].map((q) => (
               <div
                 key={q.name}
-                className='border-border bg-card rounded-[14px] border p-[26px]'
+                className='border-border bg-card rounded-4 border p-6'
               >
                 <div className='text-foreground mb-3.5 flex gap-0.5'>
                   {[...Array(5)].map((_, i) => (
                     <StarIcon key={i} />
                   ))}
                 </div>
-                <p className='text-[1rem] tracking-[-0.01em] [text-wrap:pretty]'>
+                <p className='text-[1rem] tracking-[-0.01em] text-pretty'>
                   {q.body}
                 </p>
                 <div className='mt-5 flex items-center gap-3'>
-                  <span className='bg-muted text-muted-foreground grid size-[38px] place-items-center rounded-full text-[0.78rem] font-semibold'>
+                  <span className='bg-muted text-muted-foreground grid size-9 place-items-center rounded-full text-[0.78rem] font-semibold'>
                     {q.initials}
                   </span>
                   <div>
@@ -949,8 +819,8 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id='faq' className='pb-[84px]'>
-        <div className='mx-auto max-w-[1120px] px-6'>
+      <section id='faq' className='pb-21'>
+        <div className='mx-auto max-w-6xl px-6'>
           <div className='text-center'>
             <span className='text-muted-foreground font-mono text-[0.72rem] tracking-[0.12em] uppercase'>
               // questions
@@ -964,8 +834,8 @@ export default function Home() {
       </section>
 
       {/* ── Final CTA ── */}
-      <section className='pb-[84px]'>
-        <div className='mx-auto max-w-[1120px] px-6'>
+      <section className='pb-21'>
+        <div className='mx-auto max-w-6xl px-6'>
           <div className='border-border bg-card relative overflow-hidden rounded-[18px] border px-8 py-14 text-center shadow-lg'>
             <div
               className='landing-grid-bg opacity-50'
@@ -979,25 +849,26 @@ export default function Home() {
             <h2 className='relative text-[clamp(1.9rem,3.6vw,2.6rem)] font-semibold tracking-[-0.035em] text-balance'>
               Your multi-tenant SaaS is one click away.
             </h2>
-            <p className='text-muted-foreground relative mx-auto mt-3.5 max-w-[480px]'>
+            <p className='text-muted-foreground relative mx-auto mt-3.5 max-w-120'>
               Skip the boilerplate. Deploy the starter to Railway and start
               building the features that actually matter.
             </p>
             <div className='relative mt-7 flex flex-wrap justify-center gap-[0.7rem]'>
               <a
-                href='https://railway.com/deploy/nextjs-better-auth-prisma-template?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic'
+                href='https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='bg-primary text-primary-foreground inline-flex h-[2.875rem] items-center gap-2 rounded-[var(--radius)] px-[1.4rem] text-[0.95rem] font-medium shadow-sm transition-all hover:-translate-y-px hover:opacity-90'
               >
-                <BoltIcon />
-                Deploy on Railway
+                <img
+                  src='https://railway.com/button.svg'
+                  alt='Deploy on Railway'
+                />
               </a>
               <a
                 href='https://github.com/laguillo/nextjs-better-auth-prisma-template'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='border-border bg-background hover:bg-muted inline-flex h-[2.875rem] items-center gap-2 rounded-[var(--radius)] border px-[1.4rem] text-[0.95rem] font-medium transition-colors'
+                className='border-border bg-background hover:bg-muted inline-flex h-11 items-center gap-2 rounded-lg border px-[1.4rem] text-[0.95rem] font-medium transition-colors'
               >
                 View on GitHub
               </a>
@@ -1007,8 +878,8 @@ export default function Home() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className='border-border mt-[84px] border-t pt-14 pb-10'>
-        <div className='mx-auto max-w-[1120px] px-6'>
+      <footer className='border-border mt-21 border-t pt-14 pb-10'>
+        <div className='mx-auto max-w-6xl px-6'>
           <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]'>
             {/* Brand col */}
             <div>
@@ -1016,23 +887,22 @@ export default function Home() {
                 href='/'
                 className='flex items-center gap-2.5 text-[0.95rem] font-semibold tracking-[-0.02em]'
               >
-                <span className='bg-primary text-primary-foreground grid size-[30px] place-items-center rounded-[8px]'>
+                <span className='bg-primary text-primary-foreground grid size-7 place-items-center rounded-[8px]'>
                   <svg
-                    viewBox='0 0 24 24'
                     fill='none'
                     stroke='currentColor'
-                    strokeWidth='2.2'
                     strokeLinecap='round'
                     strokeLinejoin='round'
-                    className='size-[17px]'
+                    strokeWidth='2.2'
+                    className='size-4'
+                    viewBox='0 0 24 24'
                   >
-                    <path d='m4 17 6-6-6-6' />
-                    <path d='M12 19h8' />
+                    <path d='m4 17 6-6-6-6m8 14h8' />
                   </svg>
                 </span>
-                Multitenant Starter
+                Multi-Tenant Starter
               </Link>
-              <p className='text-muted-foreground mt-3.5 max-w-[260px] text-[0.88rem] [text-wrap:pretty]'>
+              <p className='text-muted-foreground mt-3.5 max-w-2xs text-[0.88rem] text-pretty'>
                 The fastest way to build multi-tenant SaaS applications. Open
                 source and free to use.
               </p>
@@ -1045,7 +915,7 @@ export default function Home() {
                   <svg
                     viewBox='0 0 24 24'
                     fill='currentColor'
-                    className='size-[18px]'
+                    className='size-4'
                   >
                     <path d='M18.244 2H21.5l-7.5 8.57L22.5 22h-6.9l-5.4-7.06L4.02 22H.76l8.02-9.17L1.5 2h7.07l4.88 6.45L18.244 2Zm-1.2 18h1.83L7.04 3.9H5.07L17.044 20Z' />
                   </svg>
@@ -1057,7 +927,7 @@ export default function Home() {
                   className='border-border bg-background text-foreground hover:bg-muted grid size-9 place-items-center rounded-[calc(var(--radius)-2px)] border transition-colors'
                   aria-label='GitHub'
                 >
-                  <GithubIcon className='size-[18px]' />
+                  <GithubIcon />
                 </a>
               </div>
             </div>
@@ -1128,7 +998,7 @@ export default function Home() {
           </div>
           <div className='border-border mt-12 flex flex-wrap items-center justify-between gap-3 border-t pt-6'>
             <p className='text-muted-foreground text-[0.82rem]'>
-              © 2026 Multitenant Starter. MIT Licensed.
+              © 2026 Multi-Tenant Starter. MIT Licensed.
             </p>
             <p className='text-muted-foreground font-mono text-[0.78rem]'>
               Built with Next.js · Prisma · Better Auth
