@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "bunx --bun prisma generate && bun --bun next build",
-    "start": "bun --bunnext start",
+    "start": "bun --bun next start",
     "lint": "eslint",
     "seed": "tsx prisma/seed.ts"
   },
