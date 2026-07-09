@@ -661,7 +661,7 @@ export default function Home() {
       </section>
 
       {/* ── Testimonials ── */}
-      <section className='pb-21'>
+      {/* <section className='pb-21'>
         <div className='mx-auto max-w-6xl px-6'>
           <div className='text-center'>
             <span className='text-muted-foreground font-mono text-[0.72rem] tracking-[0.12em] uppercase'>
@@ -713,7 +713,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── FAQ ── */}
       <section id='faq' className='pb-21'>
