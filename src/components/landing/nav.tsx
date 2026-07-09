@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Zap, Menu, X, Terminal } from 'lucide-react';
 import { ModeToggle } from '@/components/shared/mode-toggle';
@@ -60,9 +61,11 @@ export function LandingNav() {
               target='_blank'
               rel='noopener noreferrer'
             >
-              <img
+              <Image
                 src='https://railway.com/button.svg'
                 alt='Deploy on Railway'
+                width={183}
+                height={40}
               />
             </a>
 

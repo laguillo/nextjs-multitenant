@@ -1,9 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { LandingNav } from '@/components/landing/nav';
 import { CopyCommand } from '@/components/landing/copy-command';
 import { LandingFAQ } from '@/components/landing/faq';
 import {
-  BoltIcon,
   CheckIcon,
   ChevronDown,
   FileIcon,
@@ -382,9 +382,11 @@ export default function Home() {
               target='_blank'
               rel='noopener noreferrer'
             >
-              <img
+              <Image
                 src='https://railway.com/button.svg'
                 alt='Deploy on Railway'
+                width={183}
+                height={40}
               />
             </a>
             <a
@@ -412,137 +414,30 @@ export default function Home() {
           </p>
           <div className='flex flex-wrap items-center justify-center gap-x-10 gap-y-4'>
             {[
-              {
-                name: 'Next.js',
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='currentColor'
-                    className='size-5'
-                  >
-                    <circle
-                      cx='12'
-                      cy='12'
-                      r='11'
-                      fill='none'
-                      stroke='currentColor'
-                      strokeWidth='1.4'
-                    />
-                    <path
-                      d='M9 8v8M9 8l6.5 8.5M15 8v6.2'
-                      stroke='currentColor'
-                      strokeWidth='1.6'
-                      fill='none'
-                      strokeLinecap='round'
-                    />
-                  </svg>
-                )
-              },
-              {
-                name: 'Prisma',
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.6'
-                    strokeLinejoin='round'
-                    className='size-5'
-                  >
-                    <path d='M5 16.5 11 3.2c.3-.7 1.3-.6 1.5.1l4.3 15c.2.6-.4 1.2-1 1L5.7 17.8a.9.9 0 0 1-.7-1.3Z' />
-                  </svg>
-                )
-              },
+              { name: 'Next.js', src: '/next-js-logo.svg', mono: true },
+              { name: 'Prisma', src: '/prisma-logo.svg', mono: true },
               {
                 name: 'Better Auth',
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.7'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-5'
-                  >
-                    <path d='M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3Z' />
-                    <path d='m9 12 2 2 4-4' />
-                  </svg>
-                )
+                src: '/better-auth-logo.svg',
+                mono: true
               },
-              {
-                name: 'shadcn/ui',
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.6'
-                    className='size-5'
-                  >
-                    <circle cx='8.5' cy='8.5' r='5.5' />
-                    <circle cx='15.5' cy='15.5' r='5.5' />
-                  </svg>
-                )
-              },
-              {
-                name: 'Tailwind',
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.7'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    className='size-5'
-                  >
-                    <path d='M6 11c1.5-4 4-5 7.5-3 2.3 1.3 3 .3 4.5-1-1.5 4-4 5-7.5 3-2.3-1.3-3-.3-4.5 1Z' />
-                    <path
-                      d='M2 16c1.5-4 4-5 7.5-3 2.3 1.3 3 .3 4.5-1'
-                      opacity='.5'
-                    />
-                  </svg>
-                )
-              },
-              {
-                name: 'PostgreSQL',
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.5'
-                    className='size-5'
-                  >
-                    <path d='M12 21c-4 0-7-3-7-9 0-5 2.5-7 5-7 1.5 0 2 .8 2 2.2' />
-                    <path d='M12 21c4 0 6.5-3 6.5-8.5C18.5 7 16.5 5 14 5' />
-                    <path d='M11 9c.5-1 1.5-1.5 2.5-1.2' />
-                  </svg>
-                )
-              },
-              {
-                name: 'TypeScript',
-                icon: (
-                  <svg
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.7'
-                    className='size-5'
-                  >
-                    <rect x='3' y='3' width='18' height='18' rx='3' />
-                    <path d='M8 10h5M10.5 10v7' strokeLinecap='round' />
-                  </svg>
-                )
-              }
+              { name: 'shadcn/ui', src: '/shadcn-ui-logo.svg', mono: true },
+              { name: 'Tailwind', src: '/tailwind-logo.svg', mono: true },
+              { name: 'PostgreSQL', src: '/postgresql-logo.svg', mono: false },
+              { name: 'TypeScript', src: '/typescript-logo.svg', mono: false }
             ].map((tech) => (
               <span
                 key={tech.name}
                 className='text-muted-foreground hover:text-foreground flex items-center gap-[0.55rem] text-[0.98rem] font-[550] tracking-[-0.02em] opacity-85 transition-all hover:opacity-100'
               >
                 <span className='grid size-5 place-items-center'>
-                  {tech.icon}
+                  <Image
+                    src={tech.src}
+                    alt={tech.name}
+                    width={20}
+                    height={20}
+                    className={`size-5 object-contain ${tech.mono ? 'dark:invert' : ''}`}
+                  />
                 </span>
                 {tech.name}
               </span>
@@ -700,9 +595,11 @@ export default function Home() {
               target='_blank'
               rel='noopener noreferrer'
             >
-              <img
+              <Image
                 src='https://railway.com/button.svg'
                 alt='Deploy on Railway'
+                width={183}
+                height={40}
               />
             </a>
             <Link
@@ -859,9 +756,11 @@ export default function Home() {
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <img
+                <Image
                   src='https://railway.com/button.svg'
                   alt='Deploy on Railway'
+                  width={183}
+                  height={40}
                 />
               </a>
               <a
