@@ -44,6 +44,13 @@ export function LandingNav() {
           </nav>
 
           <div className='flex items-center gap-2'>
+            <Link
+              href='/login'
+              className='hidden md:inline-flex items-center text-muted-foreground hover:text-foreground hover:bg-muted rounded-[calc(var(--radius)-2px)] px-3 py-[0.45rem] text-sm font-[450] transition-colors'
+            >
+              Sign in
+            </Link>
+
             <ModeToggle />
 
             <a
@@ -105,6 +112,13 @@ export function LandingNav() {
           >
             GitHub ↗
           </a>
+          <Link
+            href='/login'
+            onClick={() => setMenuOpen(false)}
+            className='border-border hover:bg-muted rounded-lg border-b px-3 py-4 text-[1.05rem] font-[450] transition-colors last:border-b-0'
+          >
+            Sign in
+          </Link>
           <Link
             href='#deploy'
             onClick={() => setMenuOpen(false)}
