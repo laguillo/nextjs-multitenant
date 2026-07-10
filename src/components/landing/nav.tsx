@@ -46,7 +46,7 @@ export function LandingNav() {
           <div className='flex items-center gap-2'>
             <Link
               href='/login'
-              className='hidden md:inline-flex items-center text-muted-foreground hover:text-foreground hover:bg-muted rounded-[calc(var(--radius)-2px)] px-3 py-[0.45rem] text-sm font-[450] transition-colors'
+              className='text-muted-foreground hover:text-foreground hover:bg-muted hidden items-center rounded-[calc(var(--radius)-2px)] px-3 py-[0.45rem] text-sm font-[450] transition-colors md:inline-flex'
             >
               Sign in
             </Link>
@@ -64,7 +64,7 @@ export function LandingNav() {
             </a>
 
             <a
-              href='https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic'
+              href='https://railway.com/deploy/IYCWZw?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic'
               target='_blank'
               rel='noopener noreferrer'
             >

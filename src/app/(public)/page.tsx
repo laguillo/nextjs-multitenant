@@ -378,7 +378,7 @@ export default function Home() {
           {/* CTA row */}
           <div className='mt-7 flex flex-wrap justify-center gap-[0.7rem]'>
             <a
-              href='https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic'
+              href='https://railway.com/deploy/IYCWZw?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -591,7 +591,7 @@ export default function Home() {
           </div>
           <div className='mt-10 flex flex-wrap items-center gap-[0.7rem]'>
             <a
-              href='https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic'
+              href='https://railway.com/deploy/IYCWZw?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -752,7 +752,7 @@ export default function Home() {
             </p>
             <div className='relative mt-7 flex flex-wrap justify-center gap-[0.7rem]'>
               <a
-                href='https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic'
+                href='https://railway.com/deploy/IYCWZw?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic'
                 target='_blank'
                 rel='noopener noreferrer'
               >
