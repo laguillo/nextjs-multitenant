@@ -32,7 +32,7 @@ export function NavMain({
                 tooltip={item.title}
                 isActive={pathname === item.url}
               >
-                <Link href={item.url}>
+                <Link href={item.url} className='flex items-center gap-2'>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
                 </Link>

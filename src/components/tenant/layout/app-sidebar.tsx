@@ -43,7 +43,10 @@ export function AppSidebar({ user, slug, orgName, ...props }: AppSidebarProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton className='data-[slot=sidebar-menu-button]:p-1.5!'>
-              <Link href={`/tenant/${slug}`}>
+              <Link
+                href={`/tenant/${slug}`}
+                className='flex items-center gap-2'
+              >
                 <Building2 className='size-5!' />
                 <span className='truncate text-base font-semibold'>
                   {orgName}

@@ -48,7 +48,6 @@ export function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton className='data-[slot=sidebar-menu-button]:p-1.5!'>
               <Link href='/'>
-                <Terminal className='size-5!' />
                 <span className='text-base font-semibold'>My Workspace</span>
               </Link>
             </SidebarMenuButton>
