@@ -11,6 +11,9 @@ export default async function DashboardPage() {
 
   const user = session.user;
 
+  const protocol =
+    process.env.NEXT_PUBLIC_ROOT_DOMAIN === 'localhost' ? 'http' : 'https';
+
   const memberships = await prisma.member.findMany({
     where: { userId: user.id },
     include: { organization: { select: { name: true, slug: true } } },
@@ -37,7 +40,9 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <p className='text-2xl font-bold'>{memberships.length}</p>
-            <p className='text-muted-foreground text-xs'>Organizations you belong to</p>
+            <p className='text-muted-foreground text-xs'>
+              Organizations you belong to
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -56,7 +61,9 @@ export default async function DashboardPage() {
             <ShieldCheck className='text-muted-foreground size-4' />
           </CardHeader>
           <CardContent>
-            <p className='text-2xl font-bold capitalize'>{user.role ?? 'User'}</p>
+            <p className='text-2xl font-bold capitalize'>
+              {user.role ?? 'User'}
+            </p>
             <p className='text-muted-foreground text-xs'>Your platform role</p>
           </CardContent>
         </Card>
@@ -77,7 +84,8 @@ export default async function DashboardPage() {
             {memberships.map(({ organization, role }) => (
               <Link
                 key={organization.slug}
-                href={`/tenant/${organization.slug}`}
+                href={`${protocol}://${organization.slug}.${process.env.NEXT_PUBLIC_APP_URL}`}
+                target='_blank'
               >
                 <Card className='hover:bg-muted/50 transition-colors'>
                   <CardHeader className='pb-2'>
