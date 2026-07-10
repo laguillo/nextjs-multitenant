@@ -2,7 +2,7 @@
 
 A production-ready multi-tenant SaaS starter built with Next.js, Better Auth, Prisma, and shadcn/ui. Each organization gets its own isolated space with scoped auth, role-based access control, and transactional email flows — all pre-configured.
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/ZweBXA?utm_medium=integration&utm_source=button&utm_campaign=generic)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/IYCWZw?referralCode=HKQvZr&utm_medium=integration&utm_source=template&utm_campaign=generic)
 
 ## Stack
 
